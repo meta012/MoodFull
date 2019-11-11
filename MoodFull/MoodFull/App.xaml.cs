@@ -12,6 +12,14 @@ namespace MoodFull
         {
             InitializeComponent();
 
+            //Opens RateRestaurantResult page when receives a message
+            MessagingCenter.Subscribe<App, byte[]>(App.Current, "OpenRestaurantResultPage", (snd, arg) =>
+            {
+                Device.BeginInvokeOnMainThread(() => {
+                    MainPage.Navigation.PushAsync(new RateRestaurantResult(arg));
+                });
+            });
+
             MainPage = new NavigationPage(new LoginPage());
         }
 

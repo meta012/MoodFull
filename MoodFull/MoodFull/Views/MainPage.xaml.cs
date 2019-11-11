@@ -17,9 +17,10 @@ namespace MoodFull
         {
             InitializeComponent();
 
+            //List for navigation items
             menuList = new List<MasterPageItem>();
 
-            //Add items to the navigation bar
+            //Add pages to the navigation bar
             var page1 = new MasterPageItem() { Title = "Rate Restaurant", TargetType = typeof(Views.RateRestaurant) };
             var page2 = new MasterPageItem() { Title = "Rated Restaurants", TargetType = typeof(Views.RatedRestaurants) };
 

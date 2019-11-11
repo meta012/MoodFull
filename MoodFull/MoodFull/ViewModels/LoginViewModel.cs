@@ -13,6 +13,7 @@ namespace MoodFull.ViewModels
 
         public LoginViewModel()
         {
+            //Executes when login button is clicked
             LauchLoginWindowCommand = new Command(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new MainPage());

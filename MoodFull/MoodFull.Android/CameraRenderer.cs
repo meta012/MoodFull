@@ -70,25 +70,39 @@ namespace MoodFull.Droid
 
         void SetupEventHandlers()
         {
-            takePhotoButton = view.FindViewById<global::Android.Widget.Button>(Resource.Id.takePhotoButton);
+            takePhotoButton = view.FindViewById<Android.Widget.Button>(Resource.Id.takePhotoButton);
             takePhotoButton.Click += TakePhotoButtonTapped;
 
-            switchCameraButton = view.FindViewById<global::Android.Widget.Button>(Resource.Id.switchCameraButton);
+            switchCameraButton = view.FindViewById<Android.Widget.Button>(Resource.Id.switchCameraButton);
             switchCameraButton.Click += SwitchCameraButtonTapped;
 
-            toggleFlashButton = view.FindViewById<global::Android.Widget.Button>(Resource.Id.toggleFlashButton);
+            toggleFlashButton = view.FindViewById<Android.Widget.Button>(Resource.Id.toggleFlashButton);
             toggleFlashButton.Click += ToggleFlashButtonTapped;
         }
 
-        async void TakePhotoButtonTapped(object sender, EventArgs e)
+        void TakePhotoButtonTapped(object sender, EventArgs e)
         {
             camera.StopPreview();
 
-            var image = textureView.Bitmap;
+            //Gets bitmap from the textureView
+            var bitmap = textureView.Bitmap;
+
+            //Converts bitmap to byte[]
+            byte[] bitmapData;
+            using (var stream = new MemoryStream())
+            {
+                bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
+                bitmapData = stream.ToArray();
+            }
+
+            //Send a message to App.axml to open next page
+            MessagingCenter.Send<App, byte[]>(App.Current as App, "OpenRestaurantResultPage", bitmapData);
+
+            camera.StartPreview();
         }
 
 
-
+        //switches between front and back cameras when button is clicked
         void SwitchCameraButtonTapped(object sender, EventArgs e)
         {
             if (cameraType == CameraFacing.Front)
@@ -113,9 +127,11 @@ namespace MoodFull.Droid
             }
         }
 
+        //turns on or off camera flash
         void ToggleFlashButtonTapped(object sender, EventArgs e)
         {
             flashOn = !flashOn;
+
             if (flashOn)
             {
                 if (cameraType == CameraFacing.Back)
@@ -125,9 +141,9 @@ namespace MoodFull.Droid
 
                     camera.StopPreview();
                     camera.Release();
-                    camera = global::Android.Hardware.Camera.Open((int)cameraType);
+                    camera = Android.Hardware.Camera.Open((int)cameraType);
                     var parameters = camera.GetParameters();
-                    parameters.FlashMode = global::Android.Hardware.Camera.Parameters.FlashModeTorch;
+                    parameters.FlashMode = Android.Hardware.Camera.Parameters.FlashModeTorch;
                     camera.SetParameters(parameters);
                     camera.SetPreviewTexture(surfaceTexture);
                     PrepareAndStartCamera();
@@ -139,15 +155,16 @@ namespace MoodFull.Droid
                 camera.StopPreview();
                 camera.Release();
 
-                camera = global::Android.Hardware.Camera.Open((int)cameraType);
+                camera = Android.Hardware.Camera.Open((int)cameraType);
                 var parameters = camera.GetParameters();
-                parameters.FlashMode = global::Android.Hardware.Camera.Parameters.FlashModeOff;
+                parameters.FlashMode = Android.Hardware.Camera.Parameters.FlashModeOff;
                 camera.SetParameters(parameters);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
             }
         }
 
+        //Restarts camera
         void PrepareAndStartCamera()
         {
             camera.StopPreview();
@@ -168,7 +185,7 @@ namespace MoodFull.Droid
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = global::Android.Hardware.Camera.Open((int)cameraType);
+            camera = Android.Hardware.Camera.Open((int)cameraType);
             textureView.LayoutParameters = new FrameLayout.LayoutParams(width, height);
             surfaceTexture = surface;
 
