@@ -10,6 +10,7 @@ using Android.Graphics;
 using Android.Hardware;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
@@ -25,12 +26,13 @@ namespace MoodFull.Droid
         Android.Widget.Button toggleFlashButton;
         Android.Widget.Button switchCameraButton;
         Android.Views.View view;
-        Activity activity;
+        AppCompatActivity activity;
         TextureView textureView;
         CameraFacing cameraType;
         SurfaceTexture surfaceTexture;
 
         bool flashOn;
+        bool isCameraStarted = false;
 
         public CameraRenderer(Context context)
             : base(context)
@@ -60,7 +62,7 @@ namespace MoodFull.Droid
 
         void SetupUserInterface()
         {
-            activity = this.Context as Activity;
+            activity = this.Context as AppCompatActivity;
             view = activity.LayoutInflater.Inflate(Resource.Layout.CameraLayout, this, false);
             cameraType = CameraFacing.Back;
 
@@ -82,6 +84,12 @@ namespace MoodFull.Droid
 
         void TakePhotoButtonTapped(object sender, EventArgs e)
         {
+            //if camera isn't started
+            if (!isCameraStarted)
+            {
+                return;
+            }
+
             camera.StopPreview();
 
             //Gets bitmap from the textureView
@@ -105,6 +113,12 @@ namespace MoodFull.Droid
         //switches between front and back cameras when button is clicked
         void SwitchCameraButtonTapped(object sender, EventArgs e)
         {
+            //if camera isn't started
+            if (!isCameraStarted)
+            {
+                return;
+            }
+
             if (cameraType == CameraFacing.Front)
             {
                 cameraType = CameraFacing.Back;
@@ -130,6 +144,12 @@ namespace MoodFull.Droid
         //turns on or off camera flash
         void ToggleFlashButtonTapped(object sender, EventArgs e)
         {
+            //if camera isn't started
+            if (!isCameraStarted)
+            {
+                return;
+            }
+
             flashOn = !flashOn;
 
             if (flashOn)
@@ -168,6 +188,7 @@ namespace MoodFull.Droid
         void PrepareAndStartCamera()
         {
             camera.StopPreview();
+            isCameraStarted = false;
 
             var display = activity.WindowManager.DefaultDisplay;
             if (display.Rotation == SurfaceOrientation.Rotation0)
@@ -180,21 +201,35 @@ namespace MoodFull.Droid
                 camera.SetDisplayOrientation(180);
             }
 
+            isCameraStarted = true;
             camera.StartPreview();
         }
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = Android.Hardware.Camera.Open((int)cameraType);
-            textureView.LayoutParameters = new FrameLayout.LayoutParams(width, height);
-            surfaceTexture = surface;
+            try
+            {
+                camera = Android.Hardware.Camera.Open((int)cameraType);
+                textureView.LayoutParameters = new FrameLayout.LayoutParams(width, height);
+                surfaceTexture = surface;
 
-            camera.SetPreviewTexture(surface);
-            PrepareAndStartCamera();
+                camera.SetPreviewTexture(surface);
+                PrepareAndStartCamera();
+            }
+            catch (Java.Lang.RuntimeException ex)
+            {
+                Permission.TryToGetCameraPermissions(activity);
+            }
+            
         }
 
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
+            if (isCameraStarted == false)
+            {
+                return true;
+            }
+
             camera.StopPreview();
             camera.Release();
             return true;

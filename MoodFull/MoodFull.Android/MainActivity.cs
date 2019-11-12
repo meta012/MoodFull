@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V7.App;
 
 namespace MoodFull.Droid
 {
@@ -22,6 +23,10 @@ namespace MoodFull.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            //Asks for camera permission
+            Permission.TryToGetCameraPermissions(this as AppCompatActivity);
         }
+
     }
 }
