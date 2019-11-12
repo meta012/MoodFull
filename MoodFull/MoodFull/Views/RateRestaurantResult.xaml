@@ -10,6 +10,25 @@
 
             <Picker Title="--Select--" ItemsSource="{Binding RestaurantList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRestaurant}" />
 
+            <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
+                <Label Text="Price range:" FontSize="Medium"/>
+                <Label Text="{Binding Price}" FontSize="Medium"/>
+            </StackLayout>
+
+            <Slider Maximum="10" MinimumTrackColor="DarkGray" MaximumTrackColor="DarkGray" Value="{Binding Price}"/>
+
+            <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
+                <Label Text="Experience:" FontSize="Medium"/>
+                <Label Text="{Binding Experience}" FontSize="Medium"/>
+            </StackLayout>
+
+            <Slider Maximum="10" MinimumTrackColor="DarkGray" MaximumTrackColor="DarkGray" Value="{Binding Experience}"/>
+
+            <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
+                <Label Text="Mood rating:" FontSize="Medium"/>
+                <Label Text="0" FontSize="Medium"/>
+            </StackLayout>
+
             <ActivityIndicator IsRunning="{Binding IsWaiting}"/>
         </StackLayout>
     </ContentPage.Content>

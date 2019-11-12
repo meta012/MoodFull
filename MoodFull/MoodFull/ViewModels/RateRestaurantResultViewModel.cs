@@ -65,6 +65,34 @@ namespace MoodFull.ViewModels
             }
         }
 
+        private double experience = 5;
+        public double Experience
+        {
+            get
+            {
+                return experience;
+            }
+            set
+            {
+                experience = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double price = 5;
+        public double Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                price = value;
+                OnPropertyChanged();
+            }
+        }
+
         async Task GetMood()
         {
             IsWaiting = true;
