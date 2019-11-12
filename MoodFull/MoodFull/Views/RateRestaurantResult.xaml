@@ -5,6 +5,12 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="Get Emotions" Command="{Binding GetEmotionsCommand}"/>
+
+            <Label Text="Select a restaurant" FontSize="Medium"/>
+
+            <Picker Title="--Select--" ItemsSource="{Binding RestaurantList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRestaurant}" />
+
+            <ActivityIndicator IsRunning="{Binding IsWaiting}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
