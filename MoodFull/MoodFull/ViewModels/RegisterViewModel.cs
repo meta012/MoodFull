@@ -6,11 +6,10 @@ using Xamarin.Forms;
 
 namespace MoodFull.ViewModels
 {
-    class RegisterViewModel
+    /*klase kuri sukurs nauja vartotojo paskyra.  Paspaudus register sugrazins kontrole
+      i login langa*/
+    public class RegisterViewModel
     {
-        //klase kuri sukurs nauja vartotojo paskyra.  Paspaudus register sugrazins kontrole
-        //i login langa
-
         string username;
         string password;
         string confirmPassword;

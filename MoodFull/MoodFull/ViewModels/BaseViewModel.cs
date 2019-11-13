@@ -19,11 +19,11 @@ namespace MoodFull.ViewModels
             set
             {
                 _AppName = value;
-                NotifyPropertyChanged("AppName");
+                OnPropertyChanged("AppName");
             }
         }
 
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
