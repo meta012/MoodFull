@@ -7,44 +7,43 @@ using System.ServiceModel.Web;
 using System.Text;
 using MoodWcfService.Entities;
 
-namespace MoodWcfService.Services
+namespace MoodWcfService.IServices
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IRestaurantService" in both code and config file together.
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IUserService" in both code and config file together.
     [ServiceContract]
-    public interface IRestaurantService
+    public interface IUserService
     {
         [OperationContract]
         [WebInvoke(Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetAllRestaurants")]
-        List<Restaurant_> GetAllRestaurants();
+            UriTemplate = "/GetAllUsers")]
+        List<User_> GetAllUsers();
 
         [OperationContract]
         [WebInvoke(Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/GetRestaurantById/{restId}")]
-        Restaurant_ GetRestaurantById(string restId);
+            UriTemplate = "/GetUserById/{userId}")]
+        User_ GetUserById(string userId);
 
         [OperationContract]
         [WebInvoke(Method = "POST",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/Create")]
-        bool CreateRestaurant(Restaurant_ restaurant);
+        bool CreateUser(User_ user);
 
         [OperationContract]
         [WebInvoke(Method = "PUT",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/Edit")]
-        bool EditRestaurant(Restaurant_ restaurant);
+        bool EditUser(User_ user);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/Delete")]
-        bool DeleteRestaurant(Restaurant_ restaurant);
+        bool DeleteUser(User_ user);
     }
 }
-

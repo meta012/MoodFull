@@ -119,9 +119,9 @@
     <Compile Include="Services\EvaluationService.svc.cs">
       <DependentUpon>EvaluationService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Services\IEvaluationService.cs" />
-    <Compile Include="Services\IRestaurantService.cs" />
-    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="IServices\IEvaluationService.cs" />
+    <Compile Include="IServices\IRestaurantService.cs" />
+    <Compile Include="IServices\IUserService.cs" />
     <Compile Include="Services\RestaurantService.svc.cs">
       <DependentUpon>RestaurantService.svc</DependentUpon>
     </Compile>

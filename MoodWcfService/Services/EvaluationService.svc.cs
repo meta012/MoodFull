@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using MoodWcfService.Entities;
 using MoodWcfService.Model;
+using MoodWcfService.IServices;
 
 namespace MoodWcfService.Services
 {
