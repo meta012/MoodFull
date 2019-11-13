@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MoodFull.Interfaces
 {
-    public interface IMoodDetector
+    public interface ICalculateMood
     {
-        Task<MoodModel> GetEmotions(byte[] byteArray);
+        double CalculateMood(MoodModel moodModel);
     }
 }

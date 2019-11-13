@@ -17,6 +17,7 @@ namespace MoodFull.ViewModels
     {
         private byte[] faceImage;
         private IMoodDetector moodDetector;
+        private ICalculateMood calculateMood;
 
         private MoodModel moodModel;
 
@@ -26,10 +27,11 @@ namespace MoodFull.ViewModels
 
         public Command GetEmotionsCommand { get; }
 
-        public RateRestaurantResultViewModel(byte[] faceImage)
+        public RateRestaurantResultViewModel(byte[] faceImage, IMoodDetector moodDetector, ICalculateMood calculateMood)
         {
             this.faceImage = faceImage;
-            moodDetector = new AzureMoodDetector();
+            this.moodDetector = moodDetector;// new AzureMoodDetector();
+            this.calculateMood = calculateMood;
 
             //Get Emotions button clicked
             GetEmotionsCommand = new Command(async ()=> await GetMood(), () => !IsWaiting);
@@ -47,6 +49,21 @@ namespace MoodFull.ViewModels
             set
             {
                 SetProperty(ref selectedRestaurant, value);
+            }
+        }
+
+        private double calculatedMood = 6;
+        public double CalculatedMood
+        {
+            get
+            {
+                return calculatedMood;
+            }
+            set
+            {
+                calculatedMood = value;
+                OnPropertyChanged();
+                GetEmotionsCommand.ChangeCanExecute();
             }
         }
 
@@ -99,6 +116,7 @@ namespace MoodFull.ViewModels
             //for whatever reason without Task.Delay(1) the ActivityIndicator isn't working
             await Task.Delay(1);
             moodModel = await moodDetector.GetEmotions(faceImage);
+            CalculatedMood = calculateMood.CalculateMood(moodModel);
             IsWaiting = false;
         }
 
