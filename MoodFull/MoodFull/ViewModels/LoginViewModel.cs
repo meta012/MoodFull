@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using MoodFull.Views;
 using Xamarin.Forms;
 
 namespace MoodFull.ViewModels
@@ -17,6 +18,11 @@ namespace MoodFull.ViewModels
             LauchLoginWindowCommand = new Command(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+            });
+
+            LauchRegisterWindowCommand = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
             });
         }
 
@@ -40,6 +46,8 @@ namespace MoodFull.ViewModels
         }
 
         public Command LauchLoginWindowCommand { get; }
+
+        public Command LauchRegisterWindowCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

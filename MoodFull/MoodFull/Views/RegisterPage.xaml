@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoodFull.Views.LoginPage">
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MoodFull.Views.RegisterPage">
     <ContentPage.Content>
-        
         <StackLayout Padding="10" Spacing="10">
             <Label Text="Username"/>
             <Entry Text="{Binding Username}" Placeholder="username"/>
@@ -11,8 +13,15 @@
             <Label Text="Password" />
             <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
 
-            <Button Text="Login" Command="{Binding LauchLoginWindowCommand}"/>
-            
+            <Label Text="Confirm password" />
+            <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
+
+            <Label Text="First name" />
+            <Entry Text="{Binding Name}" Placeholder="name"/>
+
+            <Label Text="Last name" />
+            <Entry Text="{Binding LastName}" Placeholder="lastName"/>
+
             <Button Text="Register" Command="{Binding LauchRegisterWindowCommand}"/>
 
         </StackLayout>
