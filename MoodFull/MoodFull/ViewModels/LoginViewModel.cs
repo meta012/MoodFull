@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace MoodFull.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
         string username;
         string password;
@@ -20,6 +20,7 @@ namespace MoodFull.ViewModels
                 await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
             });
 
+            //Executes when register button is clicked
             LauchRegisterWindowCommand = new Command(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
@@ -48,12 +49,5 @@ namespace MoodFull.ViewModels
         public Command LauchLoginWindowCommand { get; }
 
         public Command LauchRegisterWindowCommand { get; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
     }
 }

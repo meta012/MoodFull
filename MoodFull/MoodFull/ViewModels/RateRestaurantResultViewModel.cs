@@ -13,15 +13,13 @@ using Xamarin.Forms;
 
 namespace MoodFull.ViewModels
 {
-    public class RateRestaurantResultViewModel : INotifyPropertyChanged
+    public class RateRestaurantResultViewModel : BaseViewModel
     {
         private byte[] faceImage;
         private IMoodDetector moodDetector;
         private ICalculateMood calculateMood;
 
         private MoodModel moodModel;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public List<Restaurant> RestaurantList { get; set; }
 
@@ -118,11 +116,6 @@ namespace MoodFull.ViewModels
             moodModel = await moodDetector.GetEmotions(faceImage);
             CalculatedMood = calculateMood.CalculateMood(moodModel);
             IsWaiting = false;
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName]string propertyName =null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected bool SetProperty<T>(ref T backfield, T value,

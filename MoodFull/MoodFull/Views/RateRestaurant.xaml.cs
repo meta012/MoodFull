@@ -21,7 +21,6 @@ namespace MoodFull.Views
         private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new RateRestaurant());
-            //Application.Current.MainPage = new NavigationPage(new Page4());
         }
     }
 }
