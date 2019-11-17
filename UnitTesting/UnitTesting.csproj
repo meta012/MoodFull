@@ -33,10 +33,6 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MoodFull\MoodFull.Android\MoodFull.Android.csproj">
-      <Project>{8a253349-97cf-426e-8058-ed1426b85f54}</Project>
-      <Name>MoodFull.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MoodFull\MoodFull\MoodFull.csproj">
       <Project>{64490496-941f-4ca2-bc56-883a6a445ad9}</Project>
       <Name>MoodFull</Name>
@@ -47,7 +43,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginViewModelTest.cs" />
+    <Compile Include="LoginViewModelTests.cs" />
+    <Compile Include="RegisterViewModelTests.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="AppInitializer.cs" />
   </ItemGroup>

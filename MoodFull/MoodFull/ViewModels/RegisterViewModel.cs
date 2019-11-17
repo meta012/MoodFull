@@ -32,5 +32,13 @@ namespace MoodFull.ViewModels
             });
         }
 
+        //checks if user entered same passwords. 
+        //True - if matches
+        //False - if not
+        public bool PasswordMatches()
+        {
+            return (password == confirmPassword);
+        }
+
     }
 }

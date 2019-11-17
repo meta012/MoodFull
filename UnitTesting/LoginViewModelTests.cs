@@ -10,23 +10,26 @@ using Xamarin.UITest.Queries;
 
 namespace UnitTesting
 {
-    class LoginViewModelTest
+    class LoginViewModelTests
     {
         [Test]
-        public void UserPropertyUserNameGetSetWorks()
+        public void UserPropertyUsernameGetSetWorks()
         {
             LoginViewModel model = new LoginViewModel();
-            model.Username = null;
-            Assert.AreEqual(model.Username, null);
+            model.Username = "test";
+            Assert.AreEqual(model.Username, "test");
         }
 
         [Test]
         public void UserPropertyPasswordGetSetWorks()
         {
             LoginViewModel model = new LoginViewModel();
-            model.Password = null;
-            Assert.AreEqual(model.Password, null);
+            model.Password = "test";
+            Assert.AreEqual(model.Password, "test");
         }
+
+
+
 
     }
 }
