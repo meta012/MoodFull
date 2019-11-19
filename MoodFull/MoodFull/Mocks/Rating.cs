@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MoodFull.Mocks
 {
-    class Rating
+   public class Rating
     {
     }
 }

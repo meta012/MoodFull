@@ -44,16 +44,28 @@ namespace MoodFull.ViewModels
                 Application.Current.MainPage.DisplayAlert("Error", "Password doesn't match", "OK");
                 return;
             }
-            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName))
+            if (IsEmptyFields())
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Fields cannot be empty", "OK");
                 return;
             }
+
+
             DataCollections.AddUser(Username, Password, Name, LastName);
             Application.Current.MainPage.DisplayAlert("Success", "", "OK");
 
             Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
+
+        public bool IsEmptyFields()
+        {
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName))
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         //checks if user entered same passwords. 
         //True - if matches

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MoodFull.Mocks
 {
-    class User
+    public class User
     {
         string username;
         string password;

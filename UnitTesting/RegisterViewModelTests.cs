@@ -67,5 +67,46 @@ namespace UnitTesting
             model.Password = "password";
             Assert.AreEqual(model.PasswordMatches(), false);
         }
+
+
+        //field testing
+        [Test]
+        public void IsEmptyFieldsOneFieldEnteredReturnFalse()
+        {
+            model = new RegisterViewModel();
+            model.Name = "test";
+            Assert.AreEqual( !model.IsEmptyFields(), false);
+
+        }
+        [Test]
+        public void IsEmptyFieldsTwoFieldEnteredReturnFalse()
+        {
+            model = new RegisterViewModel();
+            model.Name = "test";
+            model.LastName = "test";
+            Assert.AreEqual(!model.IsEmptyFields(), false);
+
+        }
+        [Test]
+        public void IsEmptyFieldsThreeFieldEnteredReturnFalse()
+        {
+            model = new RegisterViewModel();
+            model.Name = "test";
+            model.LastName = "test";
+            model.Password = "test";
+            Assert.AreEqual(!model.IsEmptyFields(), false);
+
+        }
+        [Test]
+        public void IsEmptyFieldsAllFieldEnteredReturnTrue()
+        {
+            model = new RegisterViewModel();
+            model.Name = "test";
+            model.LastName = "test";
+            model.Password = "test";
+            model.Username = "test";
+            Assert.AreEqual(!model.IsEmptyFields(), true);
+
+        }
     }
 }

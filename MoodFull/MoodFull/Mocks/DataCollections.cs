@@ -4,7 +4,8 @@ using System.Text;
 
 namespace MoodFull.Mocks
 {
-    class DataCollections
+   
+   public static class DataCollections
     {
         public static List<Rating> ratings = new List<Rating>();
         public static List<User> userList = new List<User>{new User("admin", "admin" ,"admin", "admin")};
