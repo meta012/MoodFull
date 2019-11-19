@@ -14,7 +14,7 @@
             <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
 
             <Label Text="Confirm password" />
-            <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
+            <Entry Text="{Binding ConfirmPassword}" Placeholder="confirmPassword" IsPassword="True"/>
 
             <Label Text="First name" />
             <Entry Text="{Binding Name}" Placeholder="name"/>
@@ -22,7 +22,7 @@
             <Label Text="Last name" />
             <Entry Text="{Binding LastName}" Placeholder="lastName"/>
 
-            <Button Text="Register" Command="{Binding LauchRegisterWindowCommand}"/>
+            <Button Text="Register" Command="{Binding LauchLoginWindowCommand}"/>
 
         </StackLayout>
     </ContentPage.Content>
