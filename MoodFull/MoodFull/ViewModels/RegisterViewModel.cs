@@ -16,6 +16,7 @@ namespace MoodFull.ViewModels
         string confirmPassword;
         string name;
         string lastName;
+        
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
@@ -23,7 +24,8 @@ namespace MoodFull.ViewModels
         public string Name { get => name; set => name = value; }
         public string LastName { get => lastName; set => lastName = value; }
 
-
+        //public delegate bool PasswordMatches(string Password, string ConfirmPassword );
+        Func<string, string, bool> PasswordMatches = delegate (string Password, string ConfirmPassword) { return Password.Equals(ConfirmPassword);};
         public RegisterViewModel()
         {
 
@@ -39,7 +41,7 @@ namespace MoodFull.ViewModels
 
         private void Register()
         {
-            if (!PasswordMatches())
+            if (!PasswordMatches(Password,ConfirmPassword))
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Password doesn't match", "OK");
                 return;
@@ -64,15 +66,6 @@ namespace MoodFull.ViewModels
                 return true;
             }
             return false;
-        }
-
-
-        //checks if user entered same passwords. 
-        //True - if matches
-        //False - if not
-        public bool PasswordMatches()
-        {
-            return (password.Equals(confirmPassword));
         }
 
     }
