@@ -51,7 +51,7 @@ namespace UnitTesting
             model.LastName = "test";
             Assert.AreEqual(model.LastName, "test");
         }
-
+        /*
         [Test]
         public void IfPasswordMatchesReturnsTrue()
         {
@@ -67,7 +67,7 @@ namespace UnitTesting
             model.Password = "password";
             Assert.AreEqual(model.PasswordMatches(), false);
         }
-
+        */
 
         //field testing
         [Test]
