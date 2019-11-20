@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33FD6C83-70A0-4F8C-BA0D-ABF16D3C2D4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>UnitTesting</RootNamespace>
+    <AssemblyName>UnitTesting</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="Xamarin.UITest" Version="3.0.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoodFull\MoodFull\MoodFull.csproj">
+      <Project>{64490496-941f-4ca2-bc56-883a6a445ad9}</Project>
+      <Name>MoodFull</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoodWcfService\MoodWcfService.csproj">
+      <Project>{8993ae67-f998-438f-a988-f4d7aec533ac}</Project>
+      <Name>MoodWcfService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LoginViewModelTests.cs" />
+    <Compile Include="RegisterViewModelTests.cs" />
+    <Compile Include="Tests.cs" />
+    <Compile Include="AppInitializer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
