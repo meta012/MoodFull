@@ -12,7 +12,7 @@ namespace MoodFull.RestClient
     {
         // KEISTI IP adresa, pagal ta, kuris nurodytas SharpProxy. 
         // External port SharpProxy nustatyti 5000
-        private const string url = "http://192.168.1.131:5000/api/user";
+        private const string url = "http://192.168.1.131:5000/api/Users";
         public async Task<List<T>> GetAsync()
         {
             var httpClient = new HttpClient();

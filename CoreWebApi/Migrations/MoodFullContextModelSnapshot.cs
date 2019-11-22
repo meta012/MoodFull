@@ -18,6 +18,86 @@ namespace CoreWebApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CoreWebApi.Models.Evaluation", b =>
+                {
+                    b.Property<long>("EvaluationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Experience")
+                        .HasColumnType("decimal(4,2)");
+
+                    b.Property<decimal>("MoodRating")
+                        .HasColumnType("decimal(4,2)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(4,2)");
+
+                    b.Property<long>("RestaurantId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("EvaluationId");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Evaluation");
+
+                    b.HasData(
+                        new
+                        {
+                            EvaluationId = 1L,
+                            Experience = 3.3m,
+                            MoodRating = 4.2m,
+                            Price = 1.5m,
+                            RestaurantId = 1L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            EvaluationId = 2L,
+                            Experience = 4.23m,
+                            MoodRating = 1.55m,
+                            Price = 6.23m,
+                            RestaurantId = 2L,
+                            UserId = 2L
+                        });
+                });
+
+            modelBuilder.Entity("CoreWebApi.Models.Restaurant", b =>
+                {
+                    b.Property<long>("RestaurantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("RestaurantId");
+
+                    b.ToTable("Restaurant");
+
+                    b.HasData(
+                        new
+                        {
+                            RestaurantId = 1L,
+                            Name = "Can can"
+                        },
+                        new
+                        {
+                            RestaurantId = 2L,
+                            Name = "Katpedele"
+                        });
+                });
+
             modelBuilder.Entity("CoreWebApi.Models.User", b =>
                 {
                     b.Property<long>("UserId")
@@ -69,6 +149,21 @@ namespace CoreWebApi.Migrations
                             UserType = 2,
                             Username = "labas"
                         });
+                });
+
+            modelBuilder.Entity("CoreWebApi.Models.Evaluation", b =>
+                {
+                    b.HasOne("CoreWebApi.Models.Restaurant", "Restaurant")
+                        .WithMany("Evaluations")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CoreWebApi.Models.User", "User")
+                        .WithMany("Evaluations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -14,7 +14,7 @@ namespace CoreWebApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long UserId { get; set; }
 
-        [Required(ErrorMessage = "Userame is required!")]
+        [Required(ErrorMessage = "Username is required!")]
         [StringLength(50, ErrorMessage = "Username cannot be longer than 50 characters")]
         public string Username { get; set; }
 
@@ -28,5 +28,6 @@ namespace CoreWebApi.Models
         [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
         public int UserType { get; set; }
+        public ICollection<Evaluation> Evaluations { get; set; }
     }
 }

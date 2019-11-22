@@ -32,6 +32,8 @@ namespace CoreWebApi
         { 
             services.AddDbContext<MoodFullContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:MoodFullDB"]));
             services.AddScoped<IDataRepository<User>, UserManager>();
+            services.AddScoped<IDataRepository<Restaurant>, RestaurantManager>();
+            services.AddScoped<IDataRepository<Evaluation>, EvaluationManager>();
             services.AddControllers();
         }
 
