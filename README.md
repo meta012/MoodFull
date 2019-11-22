@@ -9,6 +9,7 @@
 5. Įeiti SharpProxy, pakeisti InternalPort į 63772 (greičiausia - jei pas jus irgi šituo Port deployina)
 6. Paleisti SharpProxy.
 7. **ANTRA** - Nueiti į MoodFull projektą. RestClient --> url pakeisti į SharpProxy rodomą "Your IP Address".
-Jei SharpProxy nustatytas External Port 5000 - tai taip ir palikti.
+Jei SharpProxy nustatytas External Port 5000 - tai taip ir palikti. Žinoma, pakeitus url turi likti ši dalis:
+5000/api/user
 8. Paleisti projektą. Man ant emuliatoriaus neveikia, geriausia prijungtus androidinį telefoną.
 9. **ĮSPĖJIMAS** Telefono WIFI turi būti tas pats, kaip ir kompiuteryje, kuriame paleista programa.
