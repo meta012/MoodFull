@@ -6,104 +6,90 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoreWebApi.Models;
+using CoreWebApi.Models.Repository;
 
 namespace CoreWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Evaluations")]
     [ApiController]
-    public class EvaluationsController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-        private readonly MoodFullContext _context;
+        private readonly IDataRepository<Evaluation> _dataRepository;
 
-        public EvaluationsController(MoodFullContext context)
+        public EmployeeController(IDataRepository<Evaluation> dataRepository)
         {
-            _context = context;
+            _dataRepository = dataRepository;
         }
 
         // GET: api/Evaluations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Evaluation>>> GetEvaluations()
+        public IActionResult Get()
         {
-            return await _context.Evaluations.ToListAsync();
+            IEnumerable<Evaluation> evaluations = _dataRepository.GetAll();
+            return Ok(evaluations);
         }
 
         // GET: api/Evaluations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Evaluation>> GetEvaluation(long id)
+        public IActionResult Get(long id)
         {
-            var evaluation = await _context.Evaluations.FindAsync(id);
+            Evaluation evaluation = _dataRepository.Get(id);
 
             if (evaluation == null)
             {
-                return NotFound();
+                return NotFound("The Evaluation record couldn't be found.");
             }
 
-            return evaluation;
-        }
-
-        // PUT: api/Evaluations/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvaluation(long id, Evaluation evaluation)
-        {
-            if (id != evaluation.EvaluationId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(evaluation).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EvaluationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(evaluation);
         }
 
         // POST: api/Evaluations
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Evaluation>> PostEvaluation(Evaluation evaluation)
+        public IActionResult Post([FromBody] Evaluation evaluation)
         {
-            _context.Evaluations.Add(evaluation);
-            await _context.SaveChangesAsync();
+            if (evaluation == null)
+            {
+                return BadRequest("Evaluation is null.");
+            }
 
-            return CreatedAtAction("GetEvaluation", new { id = evaluation.EvaluationId }, evaluation);
+            _dataRepository.Add(evaluation);
+            return CreatedAtRoute(
+                  "Get",
+                  new { Id = evaluation.EvaluationId },
+                  evaluation);
+        }
+
+        // PUT: api/Evaluations/5
+        [HttpPut("{id}")]
+        public IActionResult Put(long id, [FromBody] Evaluation evaluation)
+        {
+            if (evaluation == null)
+            {
+                return BadRequest("Evaluation is null.");
+            }
+
+            Evaluation evaluationToUpdate = _dataRepository.Get(id);
+            if (evaluationToUpdate == null)
+            {
+                return NotFound("The Evaluation record couldn't be found.");
+            }
+
+            _dataRepository.Update(evaluationToUpdate, evaluation);
+            return NoContent();
         }
 
         // DELETE: api/Evaluations/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Evaluation>> DeleteEvaluation(long id)
+        public IActionResult Delete(long id)
         {
-            var evaluation = await _context.Evaluations.FindAsync(id);
+            Evaluation evaluation = _dataRepository.Get(id);
             if (evaluation == null)
             {
-                return NotFound();
+                return NotFound("The Evaluation record couldn't be found.");
             }
 
-            _context.Evaluations.Remove(evaluation);
-            await _context.SaveChangesAsync();
-
-            return evaluation;
-        }
-
-        private bool EvaluationExists(long id)
-        {
-            return _context.Evaluations.Any(e => e.EvaluationId == id);
+            _dataRepository.Delete(evaluation);
+            return NoContent();
         }
     }
 }

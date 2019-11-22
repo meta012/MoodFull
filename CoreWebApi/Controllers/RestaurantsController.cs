@@ -6,104 +6,90 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoreWebApi.Models;
+using CoreWebApi.Models.Repository;
 
 namespace CoreWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Restaurants")]
     [ApiController]
     public class RestaurantsController : ControllerBase
     {
-        private readonly MoodFullContext _context;
+        private readonly IDataRepository<Restaurant> _dataRepository;
 
-        public RestaurantsController(MoodFullContext context)
+        public RestaurantsController(IDataRepository<Restaurant> dataRepository)
         {
-            _context = context;
+            _dataRepository = dataRepository;
         }
 
         // GET: api/Restaurants
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants()
+        public IActionResult Get()
         {
-            return await _context.Restaurants.ToListAsync();
+            IEnumerable<Restaurant> restaurants = _dataRepository.GetAll();
+            return Ok(restaurants);
         }
 
         // GET: api/Restaurants/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Restaurant>> GetRestaurant(long id)
+        public IActionResult Get(long id)
         {
-            var restaurant = await _context.Restaurants.FindAsync(id);
+            Restaurant restaurant = _dataRepository.Get(id);
 
             if (restaurant == null)
             {
-                return NotFound();
+                return NotFound("The Restaurant record couldn't be found.");
             }
 
-            return restaurant;
-        }
-
-        // PUT: api/Restaurants/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRestaurant(long id, Restaurant restaurant)
-        {
-            if (id != restaurant.RestaurantId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(restaurant).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RestaurantExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(restaurant);
         }
 
         // POST: api/Restaurants
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Restaurant>> PostRestaurant(Restaurant restaurant)
+        public IActionResult Post([FromBody] Restaurant restaurant)
         {
-            _context.Restaurants.Add(restaurant);
-            await _context.SaveChangesAsync();
+            if (restaurant == null)
+            {
+                return BadRequest("Restaurant is null.");
+            }
 
-            return CreatedAtAction("GetRestaurant", new { id = restaurant.RestaurantId }, restaurant);
+            _dataRepository.Add(restaurant);
+            return CreatedAtRoute(
+                  "Get",
+                  new { Id = restaurant.RestaurantId },
+                  restaurant);
+        }
+
+        // PUT: api/Restaurants/5
+        [HttpPut("{id}")]
+        public IActionResult Put(long id, [FromBody] Restaurant restaurant)
+        {
+            if (restaurant == null)
+            {
+                return BadRequest("Restaurant is null.");
+            }
+
+            Restaurant restaurantToUpdate = _dataRepository.Get(id);
+            if (restaurantToUpdate == null)
+            {
+                return NotFound("The Restaurant record couldn't be found.");
+            }
+
+            _dataRepository.Update(restaurantToUpdate, restaurant);
+            return NoContent();
         }
 
         // DELETE: api/Restaurants/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Restaurant>> DeleteRestaurant(long id)
+        public IActionResult Delete(long id)
         {
-            var restaurant = await _context.Restaurants.FindAsync(id);
+            Restaurant restaurant = _dataRepository.Get(id);
             if (restaurant == null)
             {
-                return NotFound();
+                return NotFound("The Restaurant record couldn't be found.");
             }
 
-            _context.Restaurants.Remove(restaurant);
-            await _context.SaveChangesAsync();
-
-            return restaurant;
-        }
-
-        private bool RestaurantExists(long id)
-        {
-            return _context.Restaurants.Any(e => e.RestaurantId == id);
+            _dataRepository.Delete(restaurant);
+            return NoContent();
         }
     }
 }

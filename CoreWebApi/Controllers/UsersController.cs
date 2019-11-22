@@ -6,104 +6,90 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoreWebApi.Models;
+using CoreWebApi.Models.Repository;
 
 namespace CoreWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly MoodFullContext _context;
+        private readonly IDataRepository<User> _dataRepository;
 
-        public UsersController(MoodFullContext context)
+        public UsersController(IDataRepository<User> dataRepository)
         {
-            _context = context;
+            _dataRepository = dataRepository;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public IActionResult Get()
         {
-            return await _context.Users.ToListAsync();
+            IEnumerable<User> users = _dataRepository.GetAll();
+            return Ok(users);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public IActionResult Get(long id)
         {
-            var user = await _context.Users.FindAsync(id);
+            User user = _dataRepository.Get(id);
 
             if (user == null)
             {
-                return NotFound();
+                return NotFound("The User couldn't be found.");
             }
 
-            return user;
-        }
-
-        // PUT: api/Users/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
-        {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(user);
         }
 
         // POST: api/Users
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public IActionResult Post([FromBody] User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            if (user == null)
+            {
+                return BadRequest("User is null.");
+            }
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            _dataRepository.Add(user);
+            return CreatedAtRoute(
+                  "Get",
+                  new { Id = user.UserId },
+                  user);
+        }
+
+        // PUT: api/Users/5
+        [HttpPut("{id}")]
+        public IActionResult Put(long id, [FromBody] User user)
+        {
+            if (user == null)
+            {
+                return BadRequest("User is null.");
+            }
+
+            User userToUpdate = _dataRepository.Get(id);
+            if (userToUpdate == null)
+            {
+                return NotFound("The User record couldn't be found.");
+            }
+
+            _dataRepository.Update(userToUpdate, user);
+            return NoContent();
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(long id)
+        public IActionResult Delete(long id)
         {
-            var user = await _context.Users.FindAsync(id);
+            User user = _dataRepository.Get(id);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("The User record couldn't be found.");
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return user;
-        }
-
-        private bool UserExists(long id)
-        {
-            return _context.Users.Any(e => e.UserId == id);
+            _dataRepository.Delete(user);
+            return NoContent();
         }
     }
 }
