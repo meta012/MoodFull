@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MoodFull.Views.POSTexamplePage"
+             xmlns:ViewModels="clr-namespace:MoodFull.ViewModels">
+    <ContentPage.BindingContext>
+        <ViewModels:LoginViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical"
+                 Spacing="18">
+        <Label Text="Username"/>
+        <Entry Text="{Binding SelectedUser.Username, Mode=TwoWay}"/>
+        <Label Text="Password"/>
+        <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}"/>
+        <Label Text="FirstName"/>
+        <Entry Text="{Binding SelectedUser.FirstName, Mode=TwoWay}"/>
+        <Label Text="LastName"/>
+        <Entry Text="{Binding SelectedUser.LastName, Mode=TwoWay}"/>
+        <Label Text="UserType"/>
+        <Entry Text="{Binding SelectedUser.UserType, Mode=TwoWay}"/>
+        <Button Text ="POST user" 
+                Command="{Binding PostCommand}"/>
+    </StackLayout>
+</ContentPage>

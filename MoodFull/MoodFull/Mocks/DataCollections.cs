@@ -8,7 +8,7 @@ namespace MoodFull.Mocks
    public static class DataCollections
     {
         public static List<Rating> ratings = new List<Rating>();
-        public static List<User> userList = new List<User>{new User("admin", "admin" ,"admin", "admin")};
+        public static List<MockUser> userList = new List<MockUser>{new MockUser("admin", "admin" ,"admin", "admin")};
 
         public static bool UserExists(string username, string password)
         {
@@ -23,7 +23,7 @@ namespace MoodFull.Mocks
         }
         public static void AddUser(string username,string password, string name,string lastname)
         {
-            userList.Add(new User(username, password, name, lastname));
+            userList.Add(new MockUser(username, password, name, lastname));
         }
     }
 }

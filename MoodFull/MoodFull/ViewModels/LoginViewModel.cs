@@ -5,6 +5,9 @@ using System.Text;
 using MoodFull.Views;
 using MoodFull.Mocks;
 using Xamarin.Forms;
+using System.Threading.Tasks;
+using MoodFull.Services;
+using MoodFull.Models;
 
 namespace MoodFull.ViewModels
 {
@@ -31,8 +34,50 @@ namespace MoodFull.ViewModels
             }
         }
 
+        /*sukurta pavyzdziui*/
+        private List<User> _usersList;
+        private User _selectedUser = new User();
+        public List<User> UsersList
+        {
+            get { return _usersList; }
+            set
+            {
+                _usersList = value;
+                OnPropertyChanged();
+            }
+        }
+        public User SelectedUser
+        {
+            get { return _selectedUser; }
+            set
+            {
+                _selectedUser = value;
+                OnPropertyChanged();
+            }
+        }
+        public Command PostCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    var userServices = new UserService();
+                    await userServices.PostUserAsync(_selectedUser);
+                });
+            }
+        }
+        private async Task InitializeDataAsync()
+        {
+            var usersServices = new UserService();
+            UsersList = await usersServices.GetUsersAsync();
+        }
+        /*sukurta pavyzdziui*/
         public LoginViewModel()
         {
+            /*sukurta pavyzdziui*/
+            InitializeDataAsync();
+            /*sukurta pavyzdziui*/
+
             //Executes when register button is clicked
             LauchRegisterWindowCommand = new Command(async () =>
             {

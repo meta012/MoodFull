@@ -16,7 +16,10 @@ namespace MoodFull.Views
 		public LoginPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new LoginViewModel();
         }
-	}
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new POSTexamplePage());
+        }
+    }
 }
