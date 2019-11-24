@@ -21,6 +21,7 @@ namespace MoodFull.RestClient
             return taskModels;
         }
 
+        //Insertina naujus. Nauja entity
         public async Task<bool> PostAsync(T t)
         {
             var httpClient = new HttpClient();
@@ -31,6 +32,7 @@ namespace MoodFull.RestClient
             return result.IsSuccessStatusCode;
         }
 
+        //Updatina duomenis
         public async Task<bool> PutAsync(long id, T t)
         {
             var httpClient = new HttpClient();

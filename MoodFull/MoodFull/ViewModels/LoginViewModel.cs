@@ -13,8 +13,13 @@ namespace MoodFull.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        //Saugomi user sarasai
+        private List<User> _usersList;
+        private User _selectedUser = new User();
         string username;
         string password;
+
+        //Get Set
         public string Username
         {
             get { return username; }
@@ -33,10 +38,14 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-
-        /*sukurta pavyzdziui*/
-        private List<User> _usersList;
-        private User _selectedUser = new User();
+        public Command LauchLoginWindowCommand
+        {
+            get
+            {
+                return new Command(Login);
+            }
+        }
+        public Command LauchRegisterWindowCommand { get; }
         public List<User> UsersList
         {
             get { return _usersList; }
@@ -71,7 +80,8 @@ namespace MoodFull.ViewModels
             var usersServices = new UserService();
             UsersList = await usersServices.GetUsersAsync();
         }
-        /*sukurta pavyzdziui*/
+
+
         public LoginViewModel()
         {
             /*sukurta pavyzdziui*/
@@ -85,16 +95,10 @@ namespace MoodFull.ViewModels
             });
         }
 
-        public Command LauchLoginWindowCommand
-        {
-            get
-            {
-                return new Command(Login);
-            }
-        }
-
-        public Command LauchRegisterWindowCommand { get; }
-
+        /// <summary>
+        /// Checks if all fields are empty or not. If username and password is not empty
+        /// logs in the user
+        /// </summary>
         private void Login()
         {
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
@@ -104,7 +108,7 @@ namespace MoodFull.ViewModels
             else
             {
                 //Executes when login button is clicked
-                if (DataCollections.UserExists(Username, Password))
+                if (DataCollections.UserExists(Username, Password, UsersList))
                 {
                     Application.Current.MainPage.DisplayAlert("Login Success", "", "OK");
                     Application.Current.MainPage.Navigation.PushAsync(new MainPage());
