@@ -108,7 +108,7 @@ namespace MoodFull.ViewModels
             else
             {
                 //Executes when login button is clicked
-                if (DataCollections.UserExists(Username, Password, UsersList))
+                if (DataCollections.UserExists(Username, Password,  UsersList))
                 {
                     Application.Current.MainPage.DisplayAlert("Login Success", "", "OK");
                     Application.Current.MainPage.Navigation.PushAsync(new MainPage());
