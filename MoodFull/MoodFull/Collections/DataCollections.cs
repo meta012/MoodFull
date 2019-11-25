@@ -9,7 +9,7 @@ namespace MoodFull.Mocks
    public static class DataCollections
     {
         /// <summary>
-        /// 
+        /// Checks if given user exists with given username and password in the list
         /// </summary>
         /// <param name="username">User usrname to find</param>
         /// <param name="password"> User password to find</param>
@@ -30,6 +30,18 @@ namespace MoodFull.Mocks
         public static void AddUser(string username,string password, string name,string lastname)
         {
            
+        }
+
+        public static int GetUserID(string username, string password, List<User> userList)
+        {
+            foreach (var item in userList)
+            {
+                if (item.Username == username && item.Password == password)
+                {
+                    //return item.id;
+                }
+            }
+            return -1;
         }
     }
 }

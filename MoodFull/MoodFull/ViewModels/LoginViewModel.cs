@@ -14,7 +14,7 @@ namespace MoodFull.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         //Saugomi user sarasai
-        private List<User> _usersList;
+        private List<User> _usersList = new List<User>();
         private User _selectedUser = new User();
         string username;
         string password;
@@ -108,7 +108,7 @@ namespace MoodFull.ViewModels
             else
             {
                 //Executes when login button is clicked
-                if (DataCollections.UserExists(Username, Password,  UsersList))
+                if (DataCollections.UserExists(Username, Password, UsersList))
                 {
                     Application.Current.MainPage.DisplayAlert("Login Success", "", "OK");
                     Application.Current.MainPage.Navigation.PushAsync(new MainPage());
