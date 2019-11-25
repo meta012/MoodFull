@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using MoodFull.Views;
-using MoodFull.Mocks;
+using MoodFull.Models;
 using Xamarin.Forms;
+using MoodFull.Services;
 
 namespace MoodFull.ViewModels
 {
@@ -16,7 +17,8 @@ namespace MoodFull.ViewModels
         string confirmPassword;
         string name;
         string lastName;
-        
+
+        UserService USER_SERVICE = new UserService();
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
@@ -25,7 +27,7 @@ namespace MoodFull.ViewModels
         public string LastName { get => lastName; set => lastName = value; }
 
         //public delegate bool PasswordMatches(string Password, string ConfirmPassword );
-        Func<string, string, bool> PasswordMatches = delegate (string Password, string ConfirmPassword) { return Password.Equals(ConfirmPassword);};
+        Func<string, string, bool> PasswordMatches = delegate (string Password, string ConfirmPassword) { return Password.Equals(ConfirmPassword); };
         public RegisterViewModel()
         {
 
@@ -41,7 +43,7 @@ namespace MoodFull.ViewModels
 
         private void Register()
         {
-            if (!PasswordMatches(Password,ConfirmPassword))
+            if (!PasswordMatches(Password, ConfirmPassword))
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Password doesn't match", "OK");
                 return;
@@ -53,9 +55,10 @@ namespace MoodFull.ViewModels
             }
 
 
-            DataCollections.AddUser(Username, Password, Name, LastName);
-            Application.Current.MainPage.DisplayAlert("Success", "", "OK");
 
+            Application.Current.MainPage.DisplayAlert("Success", "", "OK");
+            User newUser = new User(username, password, name, lastName, 0);
+            USER_SERVICE.PostUserAsync(newUser);
             Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
 
