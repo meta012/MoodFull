@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MoodFull.Views;
-using MoodFull.Mocks;
+using MoodFull.Models;
 using Xamarin.Forms;
 
 namespace MoodFull.ViewModels
@@ -53,9 +53,10 @@ namespace MoodFull.ViewModels
             }
 
 
-            DataCollections.AddUser(Username, Password, Name, LastName);
+        
             Application.Current.MainPage.DisplayAlert("Success", "", "OK");
-
+            User newUser = new User(username, password, name, lastName,0);
+            
             Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
 
