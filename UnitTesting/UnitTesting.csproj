@@ -37,10 +37,6 @@
       <Project>{64490496-941f-4ca2-bc56-883a6a445ad9}</Project>
       <Name>MoodFull</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MoodWcfService\MoodWcfService.csproj">
-      <Project>{8993ae67-f998-438f-a988-f4d7aec533ac}</Project>
-      <Name>MoodWcfService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoginViewModelTests.cs" />
