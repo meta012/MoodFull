@@ -6,6 +6,7 @@ namespace MoodFull.Models
 {
     public class Restaurant
     {
+        public long RestaurantId { get; set; }
         public string Name { get; set; }
     }
 }

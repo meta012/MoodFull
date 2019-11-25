@@ -1,23 +1,48 @@
-﻿using MoodFull.Models;
+﻿using MoodFull.RestClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using MoodFull.Models;
 
 namespace MoodFull.Services
 {
     public class RestaurantService
     {
-        //Method for getting restaurants
-        //actually needs to get everything from database
-        public static List<Restaurant> GetRestaurants()
+        private const string restaurantUrl = "Restaurants";
+        //Gauna restoranus
+        public async Task<List<Restaurant>> GetRestaurantsAsync()
         {
-            var restaurants = new List<Restaurant>()
-            {
-                new Restaurant() {Name="Can Can"},
-                new Restaurant() {Name="Express"},
-                new Restaurant() {Name="Something Else"}
-            };
-            return restaurants;
+            RestClient<Restaurant> restClient = new RestClient<Restaurant>();
+            var restaurantsList = await restClient.GetAsync(restaurantUrl);
+            return restaurantsList;
+        }
+
+        //Gauna viena restorana pagal id
+        public async Task<Restaurant> GetRestaurantAsync(long id)
+        {
+            RestClient<Restaurant> restClient = new RestClient<Restaurant>();
+            var restaurant = await restClient.GetAsync(id, restaurantUrl);
+            return restaurant;
+        }
+
+        //Insertina nauja restorana
+        public async Task PostRestaurantAsync(Restaurant restaurant)
+        {
+            RestClient<Restaurant> restClient = new RestClient<Restaurant>();
+            var isSuccess = await restClient.PostAsync(restaurant, restaurantUrl);
+        }
+
+        //Upadtina esama restorana. 
+        public async Task PutRestaurantAsync(long id, Restaurant restaurant)
+        {
+            RestClient<Restaurant> restClient = new RestClient<Restaurant>();
+            var isSuccess = await restClient.PutAsync(id, restaurant, restaurantUrl);
+        }
+        public async Task DeleteRestaurantAsync(long id)
+        {
+            RestClient<Restaurant> restClient = new RestClient<Restaurant>();
+            var isSuccess = await restClient.DeleteAsync(id, restaurantUrl);
         }
     }
 }

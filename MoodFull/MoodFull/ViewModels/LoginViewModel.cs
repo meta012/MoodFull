@@ -81,11 +81,18 @@ namespace MoodFull.ViewModels
             UsersList = await usersServices.GetUsersAsync();
         }
 
+        private async Task GetUserAsync()
+        {
+            var usersServices = new UserService();
+            SelectedUser = await usersServices.GetUserAsync(2);
+        }
+
 
         public LoginViewModel()
         {
             /*sukurta pavyzdziui*/
             InitializeDataAsync();
+            GetUserAsync();
             /*sukurta pavyzdziui*/
 
             //Executes when register button is clicked
