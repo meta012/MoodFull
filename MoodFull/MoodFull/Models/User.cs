@@ -12,7 +12,6 @@ namespace MoodFull.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int UserType { get; set; }
-        public int UserID { get; set; }
 
 
         public User(string username, string password, string firstName, string lastName, int userType)
