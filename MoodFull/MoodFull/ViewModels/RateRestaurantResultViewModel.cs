@@ -21,7 +21,7 @@ namespace MoodFull.ViewModels
 
         private MoodModel moodModel;
 
-        public List<Restaurant> RestaurantList { get; set; }
+        public List<MockRestaurant> RestaurantList { get; set; }
 
         public Command GetEmotionsCommand { get; }
 
@@ -34,11 +34,11 @@ namespace MoodFull.ViewModels
             //Get Emotions button clicked
             GetEmotionsCommand = new Command(async ()=> await GetMood(), () => !IsWaiting);
 
-            RestaurantList = RestaurantService.GetRestaurants().OrderBy(c => c.Name).ToList();
+            RestaurantList = MockRestaurantService.GetRestaurants().OrderBy(c => c.Name).ToList();
         }
 
-        private Restaurant selectedRestaurant;
-        public Restaurant SelectedRestaurant
+        private MockRestaurant selectedRestaurant;
+        public MockRestaurant SelectedRestaurant
         {
             get
             {

@@ -18,6 +18,9 @@
         <Button Text="Add new user"
                     Clicked="Button_Clicked"/>
 
+        <Label Text="IS DB USERIS"/>
+        <Label Text="{Binding SelectedUser.Username}"/>
+            
         <ListView ItemsSource="{Binding UsersList}"
                       HasUnevenRows="True">
             <ListView.ItemTemplate>
