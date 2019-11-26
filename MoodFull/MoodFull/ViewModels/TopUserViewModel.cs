@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MoodFull.ViewModels
 {
-    public class TopUserViewModel 
+    public class TopUserViewModel : BaseViewModel
     {
         private List<Evaluation> _evaluationList = new List<Evaluation>();
         private User _selectedUser = new User();
@@ -20,6 +20,7 @@ namespace MoodFull.ViewModels
             set
             {
                 _evaluationList = value;
+                OnPropertyChanged();
             }
         }
         public User SelectedUser
@@ -28,6 +29,7 @@ namespace MoodFull.ViewModels
             set
             {
                 _selectedUser = value;
+                OnPropertyChanged();
             }
         }
         public int TopUserIdCount
@@ -36,11 +38,13 @@ namespace MoodFull.ViewModels
             set
             {
                 _topUserIdCount = value;
+                OnPropertyChanged();
             }
         }
         public TopUserViewModel ()
         {
-            GetEvaluationList();
+            var evaluationsServices = new EvaluationService();
+            EvaluationsList = Task.Run(async () => await evaluationsServices.GetEvaluationsAsync()).Result;
             GetMaxUserIDCount();
             GetUser();
 
@@ -55,11 +59,6 @@ namespace MoodFull.ViewModels
 
             _topUserId = item.UserId;
             _topUserIdCount = item.Count;
-        }
-        private async Task GetEvaluationList()
-        {
-            var evaluationsServices = new EvaluationService();
-            EvaluationsList = await evaluationsServices.GetEvaluationsAsync();
         }
         private async Task GetUser()
         {
