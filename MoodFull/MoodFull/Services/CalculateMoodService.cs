@@ -11,7 +11,7 @@ namespace MoodFull.Services
         public double CalculateMood(MoodModel moodModel)
         {
             //calculate score need implementations
-            return moodModel.faceAttributes.emotion.neutral;
+            return moodModel.faceAttributes.emotion.happiness*10;
         }
     }
 }
