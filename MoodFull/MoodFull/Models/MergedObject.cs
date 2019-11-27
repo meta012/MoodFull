@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MoodFull.Models
 {
-    class MergedObject
+    public class MergedObject
     {
         public decimal MoodRating { get; set; }
         public decimal Price { get; set; }

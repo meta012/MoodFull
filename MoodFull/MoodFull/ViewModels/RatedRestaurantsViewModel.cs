@@ -11,17 +11,17 @@ using System.IO;
 
 namespace MoodFull.ViewModels
 {
-    class RatedRestaurantsViewModel : BaseViewModel
+    public class RatedRestaurantsViewModel : BaseViewModel
     {
         private List<Evaluation> _evaluationList = new List<Evaluation>();
         private List<Restaurant> _restaurantList = new List<Restaurant>();
         private List<User> _usersList = new List<User>();
         private List<MergedObject> _mergedList = new List<MergedObject>();
-        
+
 
         public RatedRestaurantsViewModel()
         {
-
+            SetMergedList();
         }
         
         public List<User> UsersList
@@ -62,15 +62,14 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        private async Task InitializeDataAsync()
+        private void SetMergedList()
         {
             var usersServices = new UserService();
             var restaurantServices = new RestaurantService();
             var evaluationServices = new EvaluationService();
-            UsersList = await usersServices.GetUsersAsync();
-            RestaurantList = await restaurantServices.GetRestaurantsAsync();
-            EvaluationList = await evaluationServices.GetEvaluationsAsync();
+            UsersList = Task.Run(async () => await usersServices.GetUsersAsync()).Result;
+            RestaurantList = Task.Run(async () => await restaurantServices.GetRestaurantsAsync()).Result;
+            EvaluationList = Task.Run(async () => await evaluationServices.GetEvaluationsAsync()).Result;
             var list = (from m1 in UsersList
                               join m2 in EvaluationList on m1.UserId equals m2.UserId
                               select new { m1.Username, m2.MoodRating, m2.Price, m2.Experience, m2.RestaurantId } into temp
