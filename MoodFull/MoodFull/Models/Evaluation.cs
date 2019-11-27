@@ -12,5 +12,14 @@ namespace MoodFull.Models
         public decimal Experience { get; set; } 
         public long UserId { get; set; }
         public long RestaurantId { get; set; }
+
+        public Evaluation(decimal moodRating, decimal price, decimal experience, long userId, long restaurantId)
+        {
+            MoodRating = moodRating;
+            Price = price;
+            Experience = experience;
+            UserId = userId;
+            RestaurantId = restaurantId;
+        }
     }
 }

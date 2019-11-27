@@ -7,10 +7,18 @@
              x:Class="MoodFull.Views.TopUserPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="The most frequently evaluated user"/>
-            <Label Text="{Binding SelectedUser.Username}"/>
-            <Label Text="Evaluated times:"/>
-            <Label Text="{Binding TopUserIdCount}"/>
+            <Label Text="The most frequently evaluated user" 
+                   HorizontalOptions="Center"
+                   FontSize="Medium"/>
+            <Label Text="{Binding SelectedUser.Username}"
+                   HorizontalOptions="Center"
+                   FontSize="Large"/>
+            <Label Text="Evaluated times:"
+                   HorizontalOptions="Center"
+                   FontSize="Medium"/>
+            <Label Text="{Binding TopUserIdCount}"
+                   HorizontalOptions="Center"
+                   FontSize="Large"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

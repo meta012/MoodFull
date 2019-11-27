@@ -14,38 +14,6 @@
         <Label Text="Password" />
         <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
 
-        <!--sukurta pavyzdziui-->
-        <Button Text="Add new user"
-                    Clicked="Button_Clicked"/>
-
-        <Label Text="IS DB USERIS"/>
-        <Label Text="{Binding SelectedUser.Username}"/>
-            
-        <ListView ItemsSource="{Binding UsersList}"
-                      HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal"
-                                         Padding="12,6">
-                            <Label Text="{Binding Username}"
-                                       FontSize="Medium"/>
-                            <Label Text="{Binding Password}"
-                                       FontSize="Medium"/>
-                            <Label Text="{Binding FirstName}"
-                                       FontSize="Medium"/>
-                            <Label Text="{Binding LastName}"
-                                       FontSize="Medium"/>
-                            <Label Text="{Binding UserType}"
-                                       FontSize="Medium"/>
-                            <Label Text="Password" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <!--sukurta pavyzdziui-->
-
         <Button Text="Login" Command="{Binding LauchLoginWindowCommand}"/>
 
         <Button Text="Register" Command="{Binding LauchRegisterWindowCommand}"/>
