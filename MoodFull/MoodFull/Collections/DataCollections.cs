@@ -21,6 +21,7 @@ namespace MoodFull.Mocks
             {
                 if (item.Username == username && item.Password == password)
                 {
+                    CurrentUser.UserID = item.UserId;
                     return true;
                 }
             }

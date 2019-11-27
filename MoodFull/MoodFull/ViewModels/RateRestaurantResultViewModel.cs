@@ -77,7 +77,6 @@ namespace MoodFull.ViewModels
             GetEmotionsCommand = new Command(async ()=> await GetMood(), () => !IsWaiting);
             AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
 
-
             SetRestaurants();
         }
 
@@ -162,6 +161,23 @@ namespace MoodFull.ViewModels
                 price = value;
                 OnPropertyChanged();
             }
+        }
+
+        // evaluates restaurant
+
+        public Command EvaluateRestaurant
+        {
+            get
+            {
+                return new Command(Evaluate);
+            }
+        }
+        private void Evaluate()
+        {
+            var evaluationServices = new EvaluationService();
+            Evaluation newEvaluation = new Evaluation((decimal)calculatedMood, (decimal)price, (decimal)experience, CurrentUser.UserID, selectedRestaurant.RestaurantId);
+            Task.Run(async () => await evaluationServices.PostEvaluationAsync(newEvaluation));
+            Application.Current.MainPage.DisplayAlert("Success", "", "OK");
         }
 
         // set/get, variables and Task to add restaurant to the DB

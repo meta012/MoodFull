@@ -55,47 +55,9 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged();
             }
         }
-        /*IRGI sukurta pavyzdziui*/
-        public User SelectedUser
-        {
-            get { return _selectedUser; }
-            set
-            {
-                _selectedUser = value;
-                OnPropertyChanged();
-            }
-        }
-        public Command PostCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    var userServices = new UserService();
-                    await userServices.PostUserAsync(_selectedUser);
-                });
-            }
-        }
-        private async Task InitializeDataAsync()
-        {
-            var usersServices = new UserService();
-            UsersList = await usersServices.GetUsersAsync();
-        }
-
-        private async Task GetUserAsync()
-        {
-            var usersServices = new UserService();
-            SelectedUser = await usersServices.GetUserAsync(2);
-        }
-        /*IRGI sukurta pavyzdziui*/
 
         public LoginViewModel()
         {
-            /*sukurta pavyzdziui*/
-            InitializeDataAsync();
-            GetUserAsync();
-            /*sukurta pavyzdziui*/
-
             //Executes when register button is clicked
             LauchRegisterWindowCommand = new Command(async () =>
             {
