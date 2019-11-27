@@ -153,6 +153,23 @@ namespace MoodFull.ViewModels
             }
         }
 
+        // evaluates restaurant
+
+        public Command EvaluateRestaurant
+        {
+            get
+            {
+                return new Command(Evaluate);
+            }
+        }
+        private void Evaluate()
+        {
+            var evaluationServices = new EvaluationService();
+            Evaluation newEvaluation = new Evaluation((decimal)calculatedMood, (decimal)price, (decimal)experience, CurrentUser.UserID, selectedRestaurant.RestaurantId);
+            Task.Run(async () => await evaluationServices.PostEvaluationAsync(newEvaluation));
+            Application.Current.MainPage.DisplayAlert("Success", "", "OK");
+        }
+
         // set/get, variables and Task to add restaurant to the DB
         private string addRestaurantEntry;
         public string AddRestaurantEntry 

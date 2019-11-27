@@ -86,7 +86,6 @@ namespace MoodFull.ViewModels
                         User newUser = new User(username, password, name, lastName, 0);
                         await USER_SERVICE.PostUserAsync(newUser);
                         await Application.Current.MainPage.DisplayAlert("Success", "", "OK");
-
                         await Application.Current.MainPage.Navigation.PopAsync();
                     }
                     return;

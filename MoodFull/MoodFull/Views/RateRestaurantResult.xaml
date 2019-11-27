@@ -36,6 +36,8 @@
                 <Label Text="{Binding CalculatedMood}" FontSize="Medium"/>
             </StackLayout>
 
+            <Button Text="Evaluate" Command="{Binding EvaluateRestaurant}"/>
+
             <ActivityIndicator IsRunning="{Binding IsWaiting}"/>
         </StackLayout>
     </ContentPage.Content>
