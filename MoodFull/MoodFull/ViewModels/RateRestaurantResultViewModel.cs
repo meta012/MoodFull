@@ -16,12 +16,17 @@ namespace MoodFull.ViewModels
 {
     public class RateRestaurantResultViewModel : BaseViewModel
     {
+        // variables
         private byte[] faceImage;
         private IMoodDetector moodDetector;
         private ICalculateMood calculateMood;
 
         private MoodModel moodModel;
 
+        
+        
+
+        // get/set with dependent variables
         private ObservableCollection<Restaurant> _restaurantsList = new ObservableCollection<Restaurant>();
         public ObservableCollection<Restaurant> RestaurantsList
         {
@@ -32,7 +37,6 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged(nameof(RestaurantsList));
             }
         }
-
         private Restaurant selectedRestaurant;
         public Restaurant SelectedRestaurant
         {
@@ -45,10 +49,24 @@ namespace MoodFull.ViewModels
                 SetProperty(ref selectedRestaurant, value);
             }
         }
+        // sets property for the picker
+        protected bool SetProperty<T>(ref T backfield, T value,
+            [CallerMemberName]string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backfield, value))
+            {
+                return false;
+            }
+            backfield = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
 
+        // buttons commands
         public Command GetEmotionsCommand { get; }
         public Command AddRestaurantCommand { get; }
 
+        // constructor
         public RateRestaurantResultViewModel(byte[] faceImage, IMoodDetector moodDetector, ICalculateMood calculateMood)
         {
             this.faceImage = faceImage;
@@ -63,46 +81,16 @@ namespace MoodFull.ViewModels
             SetRestaurants();
         }
 
-        private void SetRestaurants()
+        // gets mood from the picture
+        async Task GetMood()
         {
-            var restaurantServices = new RestaurantService();
-            var restaurantsDbList = Task.Run(async () => await restaurantServices.GetRestaurantsAsync()).Result;
-            foreach (Restaurant rest in restaurantsDbList)
-            {
-                RestaurantsList.Add(rest);
-            }
-            RestaurantsList.OrderByDescending(c => c.Name);
+            IsWaiting = true;
+            //for whatever reason without Task.Delay(1) the ActivityIndicator isn't working
+            await Task.Delay(1);
+            moodModel = await moodDetector.GetEmotions(faceImage);
+            CalculatedMood = calculateMood.CalculateMood(moodModel);
+            IsWaiting = false;
         }
-
-        private double calculatedMood = 6;
-        public double CalculatedMood
-        {
-            get
-            {
-                return calculatedMood;
-            }
-            set
-            {
-                calculatedMood = value;
-                OnPropertyChanged();
-                GetEmotionsCommand.ChangeCanExecute();
-            }
-        }
-
-        private string addRestaurantEntry;
-        public string AddRestaurantEntry 
-        {
-            get
-            {
-                return addRestaurantEntry;
-            }
-            set
-            {
-                addRestaurantEntry = value;
-                OnPropertyChanged();
-            }
-        }
-
         private bool isWaiting = false;
         public bool IsWaiting
         {
@@ -116,6 +104,35 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged();
                 GetEmotionsCommand.ChangeCanExecute();
                 AddRestaurantCommand.ChangeCanExecute();
+            }
+        }
+
+        // sets restaurants from database. Puts to observable-to be changed while in the same page
+        private void SetRestaurants()
+        {
+            var restaurantServices = new RestaurantService();
+            var restaurantsDbList = Task.Run(async () => await restaurantServices.GetRestaurantsAsync()).Result;
+            foreach (Restaurant rest in restaurantsDbList)
+            {
+                RestaurantsList.Add(rest);
+            }
+            RestaurantsList.OrderByDescending(c => c.Name);
+        }
+
+        // set/get, variables for the mood, exp and price
+
+        private double calculatedMood = 6;
+        public double CalculatedMood
+        {
+            get
+            {
+                return calculatedMood;
+            }
+            set
+            {
+                calculatedMood = value;
+                OnPropertyChanged();
+                GetEmotionsCommand.ChangeCanExecute();
             }
         }
 
@@ -147,26 +164,19 @@ namespace MoodFull.ViewModels
             }
         }
 
-        async Task GetMood()
+        // set/get, variables and Task to add restaurant to the DB
+        private string addRestaurantEntry;
+        public string AddRestaurantEntry 
         {
-            IsWaiting = true;
-            //for whatever reason without Task.Delay(1) the ActivityIndicator isn't working
-            await Task.Delay(1);
-            moodModel = await moodDetector.GetEmotions(faceImage);
-            CalculatedMood = calculateMood.CalculateMood(moodModel);
-            IsWaiting = false;
-        }
-
-        protected bool SetProperty<T>(ref T backfield, T value,
-            [CallerMemberName]string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backfield, value))
+            get
             {
-                return false;
+                return addRestaurantEntry;
             }
-            backfield = value;
-            OnPropertyChanged(propertyName);
-            return true;
+            set
+            {
+                addRestaurantEntry = value;
+                OnPropertyChanged();
+            }
         }
 
         async Task AddRestaurant()
@@ -193,6 +203,8 @@ namespace MoodFull.ViewModels
             AddRestaurantEntry = "";
 
             await restaurantServices.PostRestaurantAsync(rest);
+            
+            // sets new restaurant to the picker
             SetRestaurants();
         }
     }
