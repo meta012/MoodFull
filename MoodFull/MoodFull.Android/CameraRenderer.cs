@@ -31,8 +31,8 @@ namespace MoodFull.Droid
         CameraFacing cameraType;
         SurfaceTexture surfaceTexture;
 
-        bool flashOn;
-        bool isCameraStarted = false;
+        private bool _flashOn;
+        private bool _isCameraStarted = false;
 
         public CameraRenderer(Context context)
             : base(context)
@@ -85,7 +85,7 @@ namespace MoodFull.Droid
         void TakePhotoButtonTapped(object sender, EventArgs e)
         {
             //if camera isn't started
-            if (!isCameraStarted)
+            if (!_isCameraStarted)
             {
                 return;
             }
@@ -114,7 +114,7 @@ namespace MoodFull.Droid
         void SwitchCameraButtonTapped(object sender, EventArgs e)
         {
             //if camera isn't started
-            if (!isCameraStarted)
+            if (!_isCameraStarted)
             {
                 return;
             }
@@ -145,14 +145,14 @@ namespace MoodFull.Droid
         void ToggleFlashButtonTapped(object sender, EventArgs e)
         {
             //if camera isn't started
-            if (!isCameraStarted)
+            if (!_isCameraStarted)
             {
                 return;
             }
 
-            flashOn = !flashOn;
+            _flashOn = !_flashOn;
 
-            if (flashOn)
+            if (_flashOn)
             {
                 if (cameraType == CameraFacing.Back)
                 {
@@ -188,7 +188,7 @@ namespace MoodFull.Droid
         void PrepareAndStartCamera()
         {
             camera.StopPreview();
-            isCameraStarted = false;
+            _isCameraStarted = false;
 
             var display = activity.WindowManager.DefaultDisplay;
             if (display.Rotation == SurfaceOrientation.Rotation0)
@@ -201,7 +201,7 @@ namespace MoodFull.Droid
                 camera.SetDisplayOrientation(180);
             }
 
-            isCameraStarted = true;
+            _isCameraStarted = true;
             camera.StartPreview();
         }
 
@@ -225,7 +225,7 @@ namespace MoodFull.Droid
 
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
-            if (isCameraStarted == false)
+            if (_isCameraStarted == false)
             {
                 return true;
             }

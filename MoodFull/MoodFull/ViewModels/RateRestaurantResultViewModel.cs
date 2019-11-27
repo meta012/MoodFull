@@ -17,11 +17,11 @@ namespace MoodFull.ViewModels
     public class RateRestaurantResultViewModel : BaseViewModel
     {
         // variables
-        private byte[] faceImage;
-        private IMoodDetector moodDetector;
-        private ICalculateMood calculateMood;
+        private byte[] _faceImage;
+        private IMoodDetector _moodDetector;
+        private ICalculateMood _calculateMood;
 
-        private MoodModel moodModel;
+        private MoodModel _moodModel;
 
         // get/set with dependent variables
         private ObservableCollection<Restaurant> _restaurantsList = new ObservableCollection<Restaurant>();
@@ -34,16 +34,16 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged(nameof(RestaurantsList));
             }
         }
-        private Restaurant selectedRestaurant;
+        private Restaurant _selectedRestaurant;
         public Restaurant SelectedRestaurant
         {
             get
             {
-                return selectedRestaurant;
+                return _selectedRestaurant;
             }
             set
             {
-                SetProperty(ref selectedRestaurant, value);
+                SetProperty(ref _selectedRestaurant, value);
             }
         }
         // sets property for the picker
@@ -65,9 +65,9 @@ namespace MoodFull.ViewModels
         // constructor
         public RateRestaurantResultViewModel(byte[] faceImage, IMoodDetector moodDetector, ICalculateMood calculateMood)
         {
-            this.faceImage = faceImage;
-            this.moodDetector = moodDetector;// new AzureMoodDetector();
-            this.calculateMood = calculateMood;
+            this._faceImage = faceImage;
+            this._moodDetector = moodDetector;
+            this._calculateMood = calculateMood;
 
             AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
 
@@ -78,20 +78,20 @@ namespace MoodFull.ViewModels
         // gets mood from the picture
         private async void GetMood()
         {
-            moodModel = await moodDetector.GetEmotions(faceImage);
-            CalculatedMood = calculateMood.CalculateMood(moodModel);
+            _moodModel = await _moodDetector.GetEmotions(_faceImage);
+            CalculatedMood = _calculateMood.CalculateMood(_moodModel);
         }
 
-        private bool isWaiting = false;
+        private bool _isWaiting = false;
         public bool IsWaiting
         {
             get
             {
-                return isWaiting;
+                return _isWaiting;
             }
             set
             {
-                isWaiting = value;
+                _isWaiting = value;
                 OnPropertyChanged();
                 AddRestaurantCommand.ChangeCanExecute();
             }
@@ -110,51 +110,49 @@ namespace MoodFull.ViewModels
         }
 
         // set/get, variables for the mood, exp and price
-
-        private double calculatedMood = 6;
+        private double _calculatedMood = 6;
         public double CalculatedMood
         {
             get
             {
-                return calculatedMood;
+                return _calculatedMood;
             }
             set
             {
-                calculatedMood = value;
+                _calculatedMood = value;
                 OnPropertyChanged();
             }
         }
 
-        private double experience = 5;
+        private double _experience = 5;
         public double Experience
         {
             get
             {
-                return experience;
+                return _experience;
             }
             set
             {
-                experience = value;
+                _experience = value;
                 OnPropertyChanged();
             }
         }
 
-        private double price = 5;
+        private double _price = 5;
         public double Price
         {
             get
             {
-                return price;
+                return _price;
             }
             set
             {
-                price = value;
+                _price = value;
                 OnPropertyChanged();
             }
         }
 
         // evaluates restaurant
-
         public Command EvaluateRestaurant
         {
             get
@@ -165,29 +163,29 @@ namespace MoodFull.ViewModels
         private void Evaluate()
         {
             var evaluationServices = new EvaluationService();
-            Evaluation newEvaluation = new Evaluation((decimal)calculatedMood, (decimal)price, (decimal)experience, CurrentUser.UserID, selectedRestaurant.RestaurantId);
+            Evaluation newEvaluation = new Evaluation((decimal)_calculatedMood, (decimal)_price, (decimal)_experience, CurrentUser.UserID, _selectedRestaurant.RestaurantId);
             Task.Run(async () => await evaluationServices.PostEvaluationAsync(newEvaluation));
             Application.Current.MainPage.DisplayAlert("Success", "", "OK");
         }
 
         // set/get, variables and Task to add restaurant to the DB
-        private string addRestaurantEntry;
+        private string _addRestaurantEntry;
         public string AddRestaurantEntry 
         {
             get
             {
-                return addRestaurantEntry;
+                return _addRestaurantEntry;
             }
             set
             {
-                addRestaurantEntry = value;
+                _addRestaurantEntry = value;
                 OnPropertyChanged();
             }
         }
 
         async Task AddRestaurant()
         {
-            if(string.IsNullOrEmpty(AddRestaurantEntry))
+            if (string.IsNullOrEmpty(AddRestaurantEntry))
             {
                 await Application.Current.MainPage.DisplayAlert("Empty value", "Please enter Restaurant name", "OK");
                 return;
@@ -195,12 +193,13 @@ namespace MoodFull.ViewModels
 
             bool choice = await Application.Current.MainPage.DisplayAlert("Confirm", $"Do you really want to add: {AddRestaurantEntry}", "Yes", "Cancel");
 
-            if(!choice)
+            if (!choice)
             {
                 return;
             }
 
-            var restaurantServices = new RestaurantService();
+            //Lazy initialization of a RestaurantService
+            Lazy<RestaurantService> restaurantService = new Lazy<RestaurantService>(() => new RestaurantService());
 
             var rest = new Restaurant();
             rest.Name = AddRestaurantEntry;
@@ -208,7 +207,7 @@ namespace MoodFull.ViewModels
             //Clear entry field
             AddRestaurantEntry = "";
 
-            await restaurantServices.PostRestaurantAsync(rest);
+            await restaurantService.Value.PostRestaurantAsync(rest);
             
             // sets new restaurant to the picker
             SetRestaurants();
