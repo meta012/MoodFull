@@ -15,6 +15,8 @@ namespace MoodFull.Views
 		public RatedRestaurants ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = new ViewModels.RatedRestaurantsViewModel();
+
+        }
 	}
 }
