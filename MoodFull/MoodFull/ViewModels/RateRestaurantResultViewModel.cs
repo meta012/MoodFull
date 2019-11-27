@@ -4,6 +4,7 @@ using MoodFull.MoodDetectors;
 using MoodFull.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -21,7 +22,29 @@ namespace MoodFull.ViewModels
 
         private MoodModel moodModel;
 
-        public List<MockRestaurant> RestaurantList { get; set; }
+        private ObservableCollection<Restaurant> _restaurantsList = new ObservableCollection<Restaurant>();
+        public ObservableCollection<Restaurant> RestaurantsList
+        {
+            get { return _restaurantsList; }
+            set
+            {
+                _restaurantsList = value;
+                OnPropertyChanged(nameof(RestaurantsList));
+            }
+        }
+
+        private Restaurant selectedRestaurant;
+        public Restaurant SelectedRestaurant
+        {
+            get
+            {
+                return selectedRestaurant;
+            }
+            set
+            {
+                SetProperty(ref selectedRestaurant, value);
+            }
+        }
 
         public Command GetEmotionsCommand { get; }
         public Command AddRestaurantCommand { get; }
@@ -36,20 +59,19 @@ namespace MoodFull.ViewModels
             GetEmotionsCommand = new Command(async ()=> await GetMood(), () => !IsWaiting);
             AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
 
-            RestaurantList = MockRestaurantService.GetRestaurants().OrderBy(c => c.Name).ToList();
+
+            SetRestaurants();
         }
 
-        private MockRestaurant selectedRestaurant;
-        public MockRestaurant SelectedRestaurant
+        private void SetRestaurants()
         {
-            get
+            var restaurantServices = new RestaurantService();
+            var restaurantsDbList = Task.Run(async () => await restaurantServices.GetRestaurantsAsync()).Result;
+            foreach (Restaurant rest in restaurantsDbList)
             {
-                return selectedRestaurant;
+                RestaurantsList.Add(rest);
             }
-            set
-            {
-                SetProperty(ref selectedRestaurant, value);
-            }
+            RestaurantsList.OrderByDescending(c => c.Name);
         }
 
         private double calculatedMood = 6;
@@ -171,6 +193,7 @@ namespace MoodFull.ViewModels
             AddRestaurantEntry = "";
 
             await restaurantServices.PostRestaurantAsync(rest);
+            SetRestaurants();
         }
     }
 }

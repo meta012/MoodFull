@@ -1,5 +1,6 @@
 ﻿using MoodFull.MoodDetectors;
 using MoodFull.Services;
+using MoodFull.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace MoodFull.Views
 		public RateRestaurantResult (byte[] faceImage)
 		{
 			InitializeComponent ();
-            BindingContext = new ViewModels.RateRestaurantResultViewModel(faceImage, new AzureMoodDetector(), new CalculateMoodService());
+            BindingContext = new RateRestaurantResultViewModel(faceImage, new AzureMoodDetector(), new CalculateMoodService());
         }
-	}
+    }
 }
