@@ -8,12 +8,13 @@
 
             <Label Text="Select a restaurant" FontSize="Medium"/>
 
-            <Picker Title="--Select--" ItemsSource="{Binding RestaurantList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRestaurant}" />
+            <Picker Title="--Select--" ItemsSource="{Binding RestaurantsList, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRestaurant}"/>
+            
 
             <StackLayout Padding="0,30,0,0" Orientation="Vertical">
-                <Label Text="Add restaurant:" FontSize="Small"/>
+                <Label Text="Add restaurant:" FontSize="Medium"/>
                 <StackLayout Orientation="Horizontal">
-                    <Entry Text="{Binding AddRestaurantEntry}" Placeholder="addRestaurantEntry"/>
+                    <Entry Text="{Binding AddRestaurantEntry}" Placeholder="Add a new restaurant"/>
                     <Button Text="Add" Command="{Binding AddRestaurantCommand}"/>
                 </StackLayout>
             </StackLayout>
