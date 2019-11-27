@@ -23,9 +23,6 @@ namespace MoodFull.ViewModels
 
         private MoodModel moodModel;
 
-        
-        
-
         // get/set with dependent variables
         private ObservableCollection<Restaurant> _restaurantsList = new ObservableCollection<Restaurant>();
         public ObservableCollection<Restaurant> RestaurantsList
@@ -63,7 +60,6 @@ namespace MoodFull.ViewModels
         }
 
         // buttons commands
-        public Command GetEmotionsCommand { get; }
         public Command AddRestaurantCommand { get; }
 
         // constructor
@@ -73,24 +69,19 @@ namespace MoodFull.ViewModels
             this.moodDetector = moodDetector;// new AzureMoodDetector();
             this.calculateMood = calculateMood;
 
-            //Get Emotions button clicked
-            GetEmotionsCommand = new Command(async ()=> await GetMood(), () => !IsWaiting);
             AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
 
-
+            GetMood();
             SetRestaurants();
         }
 
         // gets mood from the picture
-        async Task GetMood()
+        private async void GetMood()
         {
-            IsWaiting = true;
-            //for whatever reason without Task.Delay(1) the ActivityIndicator isn't working
-            await Task.Delay(1);
             moodModel = await moodDetector.GetEmotions(faceImage);
             CalculatedMood = calculateMood.CalculateMood(moodModel);
-            IsWaiting = false;
         }
+
         private bool isWaiting = false;
         public bool IsWaiting
         {
@@ -102,7 +93,6 @@ namespace MoodFull.ViewModels
             {
                 isWaiting = value;
                 OnPropertyChanged();
-                GetEmotionsCommand.ChangeCanExecute();
                 AddRestaurantCommand.ChangeCanExecute();
             }
         }
@@ -132,7 +122,6 @@ namespace MoodFull.ViewModels
             {
                 calculatedMood = value;
                 OnPropertyChanged();
-                GetEmotionsCommand.ChangeCanExecute();
             }
         }
 
