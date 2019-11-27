@@ -7,6 +7,28 @@
             <Label Text="The list of rated restaurants"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding MergedList}"
+                      HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         Padding="12,6">
+                                <Label Text="{Binding Username}"
+                                       FontSize="Medium"/>
+                                <Label Text="{Binding RestaurantName}"
+                                       FontSize="Medium"/>
+                                <Label Text="{Binding Experience}"
+                                       FontSize="Medium"/>
+                                <Label Text="{Binding Price}"
+                                       FontSize="Medium"/>
+                                <Label Text="{Binding MoodRating}"
+                                       FontSize="Medium"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
