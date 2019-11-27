@@ -5,6 +5,7 @@ using MoodFull.Views;
 using MoodFull.Models;
 using Xamarin.Forms;
 using MoodFull.Services;
+using System.Threading.Tasks;
 
 namespace MoodFull.ViewModels
 {
@@ -18,6 +19,7 @@ namespace MoodFull.ViewModels
         string name;
         string lastName;
 
+        private List<User> _usersList = new List<User>();
         UserService USER_SERVICE = new UserService();
 
         public string Username { get => username; set => username = value; }
@@ -28,38 +30,40 @@ namespace MoodFull.ViewModels
 
         //public delegate bool PasswordMatches(string Password, string ConfirmPassword );
         Func<string, string, bool> PasswordMatches = delegate (string Password, string ConfirmPassword) { return Password.Equals(ConfirmPassword); };
+        public List<User> UsersList
+        {
+            get { return _usersList; }
+            set
+            {
+                _usersList = value;
+            }
+        }
         public RegisterViewModel()
         {
 
         }
 
-        public Command LauchLoginWindowCommand
+        private bool IsCorrect()
         {
-            get
-            {
-                return new Command(Register);
-            }
-        }
-
-        private void Register()
-        {
-            if (!PasswordMatches(Password, ConfirmPassword))
-            {
-                Application.Current.MainPage.DisplayAlert("Error", "Password doesn't match", "OK");
-                return;
-            }
             if (IsEmptyFields())
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Fields cannot be empty", "OK");
-                return;
+                return false;
             }
+            UsersList = Task.Run(async () => await USER_SERVICE.GetUsersAsync()).Result;
 
-
-
-            Application.Current.MainPage.DisplayAlert("Success", "", "OK");
-            User newUser = new User(username, password, name, lastName, 0);
-            USER_SERVICE.PostUserAsync(newUser);
-            Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            if (UsersList.Find(x => x.Username.Equals(username)) != null)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "Username is already taken", "OK");
+                return false;
+            }
+            if (!PasswordMatches(Password, ConfirmPassword))
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "Password doesn't match", "OK");
+                return false;
+            }
+            return true;
+            
         }
 
         public bool IsEmptyFields()
@@ -71,5 +75,26 @@ namespace MoodFull.ViewModels
             return false;
         }
 
+        public Command LauchLoginWindowCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (IsCorrect())
+                    {
+                        User newUser = new User(username, password, name, lastName, 0);
+                        await USER_SERVICE.PostUserAsync(newUser);
+                        await Application.Current.MainPage.DisplayAlert("Success", "", "OK");
+
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                    }
+                    return;
+
+                });
+            }
+        }
+
     }
+
 }

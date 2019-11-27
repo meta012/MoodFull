@@ -55,6 +55,7 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged();
             }
         }
+        /*IRGI sukurta pavyzdziui*/
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -86,7 +87,7 @@ namespace MoodFull.ViewModels
             var usersServices = new UserService();
             SelectedUser = await usersServices.GetUserAsync(2);
         }
-
+        /*IRGI sukurta pavyzdziui*/
 
         public LoginViewModel()
         {
@@ -108,6 +109,9 @@ namespace MoodFull.ViewModels
         /// </summary>
         private void Login()
         {
+            var usersServices = new UserService();
+            UsersList = Task.Run(async () => await usersServices.GetUsersAsync()).Result;
+
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
                 Application.Current.MainPage.DisplayAlert("Empty values", "Please enter Username and Password", "OK");

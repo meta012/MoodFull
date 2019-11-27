@@ -10,6 +10,14 @@
 
             <Picker Title="--Select--" ItemsSource="{Binding RestaurantList}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRestaurant}" />
 
+            <StackLayout Padding="0,30,0,0" Orientation="Vertical">
+                <Label Text="Add restaurant:" FontSize="Small"/>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding AddRestaurantEntry}" Placeholder="addRestaurantEntry"/>
+                    <Button Text="Add" Command="{Binding AddRestaurantCommand}"/>
+                </StackLayout>
+            </StackLayout>
+            
             <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
                 <Label Text="Price range:" FontSize="Medium"/>
                 <Label Text="{Binding Price}" FontSize="Medium"/>

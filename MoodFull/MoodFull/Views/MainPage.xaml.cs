@@ -23,9 +23,11 @@ namespace MoodFull
             //Add pages to the navigation bar
             var page1 = new MasterPageItem() { Title = "Rate Restaurant", TargetType = typeof(Views.RateRestaurant) };
             var page2 = new MasterPageItem() { Title = "Rated Restaurants", TargetType = typeof(Views.RatedRestaurants) };
+            var page3 = new MasterPageItem() { Title = "Top User", TargetType = typeof(Views.TopUserPage) };
 
             menuList.Add(page1);
             menuList.Add(page2);
+            menuList.Add(page3);
 
             NavigationList.ItemsSource = menuList;
 

@@ -24,6 +24,7 @@ namespace MoodFull.ViewModels
         public List<MockRestaurant> RestaurantList { get; set; }
 
         public Command GetEmotionsCommand { get; }
+        public Command AddRestaurantCommand { get; }
 
         public RateRestaurantResultViewModel(byte[] faceImage, IMoodDetector moodDetector, ICalculateMood calculateMood)
         {
@@ -33,6 +34,7 @@ namespace MoodFull.ViewModels
 
             //Get Emotions button clicked
             GetEmotionsCommand = new Command(async ()=> await GetMood(), () => !IsWaiting);
+            AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
 
             RestaurantList = MockRestaurantService.GetRestaurants().OrderBy(c => c.Name).ToList();
         }
@@ -65,6 +67,20 @@ namespace MoodFull.ViewModels
             }
         }
 
+        private string addRestaurantEntry;
+        public string AddRestaurantEntry 
+        {
+            get
+            {
+                return addRestaurantEntry;
+            }
+            set
+            {
+                addRestaurantEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
         private bool isWaiting = false;
         public bool IsWaiting
         {
@@ -77,6 +93,7 @@ namespace MoodFull.ViewModels
                 isWaiting = value;
                 OnPropertyChanged();
                 GetEmotionsCommand.ChangeCanExecute();
+                AddRestaurantCommand.ChangeCanExecute();
             }
         }
 
@@ -128,6 +145,32 @@ namespace MoodFull.ViewModels
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
+        }
+
+        async Task AddRestaurant()
+        {
+            if(string.IsNullOrEmpty(AddRestaurantEntry))
+            {
+                await Application.Current.MainPage.DisplayAlert("Empty value", "Please enter Restaurant name", "OK");
+                return;
+            }
+
+            bool choice = await Application.Current.MainPage.DisplayAlert("Confirm", $"Do you really want to add: {AddRestaurantEntry}", "Yes", "Cancel");
+
+            if(!choice)
+            {
+                return;
+            }
+
+            var restaurantServices = new RestaurantService();
+
+            var rest = new Restaurant();
+            rest.Name = AddRestaurantEntry;
+
+            //Clear entry field
+            AddRestaurantEntry = "";
+
+            await restaurantServices.PostRestaurantAsync(rest);
         }
     }
 }
