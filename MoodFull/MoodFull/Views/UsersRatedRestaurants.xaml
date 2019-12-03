@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MoodFull.Views.UsersRatedRestaurants">
+    <ContentPage.Content>
+        <StackLayout
+            BackgroundColor="LightSkyBlue">
+            <Label Text="The list of restaurants that you have rated"
+                   FontSize="Large"
+                   TextColor="Black"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding UsersEvaluations}"
+                      HorizontalOptions="Center"
+                      HasUnevenRows="True">
+                <ListView.Header>
+
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Text="RestaurantName" BackgroundColor="Green" Grid.Column="0" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Experience" BackgroundColor="Green" Grid.Column="1" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Price" BackgroundColor="Green" Grid.Column="2" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Moodrating" BackgroundColor="Green" Grid.Column="3" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         Padding="0,6,10,0">
+                                <Label Text="{Binding RestaurantName}"
+                                       FontSize="Large"
+                                       TextColor="MidnightBlue"
+                                       Margin="0,20,0,0"/>
+                                <Label Text="{Binding Experience}"
+                                       FontSize="Large"
+                                       TextColor="MidnightBlue"
+                                       Margin="30,20,0,0"/>
+                                <Label Text="{Binding Price}"
+                                       FontSize="Large"
+                                       TextColor="MidnightBlue"
+                                       Margin="60,20,0,0"/>
+                                <Label Text="{Binding MoodRating}"
+                                       FontSize="Large"
+                                       TextColor="MidnightBlue"
+                                       Margin="60,20,0,0"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
