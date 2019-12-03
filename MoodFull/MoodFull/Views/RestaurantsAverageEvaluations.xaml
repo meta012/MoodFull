@@ -8,6 +8,7 @@
     <ContentPage.Content>
         <StackLayout
             BackgroundColor="LightSkyBlue">
+            <SearchBar Placeholder="Search for a restaurant" TextChanged="SearchBar_OnTextChanged"></SearchBar>
             <Label Text="The list of every restaurant average evaluation"
                    FontSize="Large"
                    TextColor="Black"
@@ -15,7 +16,9 @@
                 HorizontalOptions="CenterAndExpand" />
             <ListView ItemsSource="{Binding RestaurantsEvaluations}"
                       HorizontalOptions="Center"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      x:Name="RestaurantsEvaluationListsView">
                 <ListView.Header>
 
                     <Grid >

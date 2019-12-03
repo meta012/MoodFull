@@ -42,9 +42,7 @@ namespace MoodFull.Services
                 {
                     usersEvaluationList.Add(x);
                 }
-                Console.WriteLine(x.UserId);
             }
-            Console.WriteLine(CurrentUser.UserID);
             return usersEvaluationList;
         }
     

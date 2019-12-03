@@ -13,9 +13,12 @@
                    TextColor="Black"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <SearchBar Placeholder="Search for a restaurant" TextChanged="SearchBar_OnTextChanged"></SearchBar>
             <ListView ItemsSource="{Binding UsersEvaluations}"
                       HorizontalOptions="Center"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      x:Name="UsersEvaluationListsView">
                 <ListView.Header>
 
                     <Grid >
