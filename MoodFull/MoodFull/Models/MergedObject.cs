@@ -22,5 +22,14 @@ namespace MoodFull.Models
             RestaurantName = restaurantName;
             UserId = userId;
         }
+        public MergedObject(decimal rating, decimal price, decimal experience, string restaurantName)
+        {
+            
+            MoodRating = rating;
+            Price = price;
+            Experience = experience;
+            RestaurantName = restaurantName;
+            
+        }
     }
 }

@@ -88,7 +88,7 @@ namespace MoodFull.ViewModels
                 }
                 else
                 {
-                    Application.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct email and password", "OK");
+                    Application.Current.MainPage.DisplayAlert("Login Fail", "Please enter correct username and password", "OK");
                 }
             }
         }

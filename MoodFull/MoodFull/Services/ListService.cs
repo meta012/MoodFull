@@ -33,12 +33,12 @@ namespace MoodFull.Services
             }
             return mergedList;
         }
-        public List<MergedObject> SetUsersEvaluations (List<MergedObject> mergedList)
+        public List<MergedObject> SetUsersEvaluations(List<MergedObject> mergedList)
         {
             List<MergedObject> usersEvaluationList = new List<MergedObject>();
             foreach (MergedObject x in mergedList)
             {
-                if(x.UserId==CurrentUser.UserID)
+                if (x.UserId == CurrentUser.UserID)
                 {
                     usersEvaluationList.Add(x);
                 }
@@ -47,5 +47,30 @@ namespace MoodFull.Services
             Console.WriteLine(CurrentUser.UserID);
             return usersEvaluationList;
         }
+    
+    public List<MergedObject> SetRestaurantsAverageEvaluations(List<MergedObject> mergedList)
+    {
+        List<MergedObject> restaurantsAverageEvaluation = new List<MergedObject>();
+
+            var result =
+                from x in mergedList
+                group x by x.RestaurantName into RestaurantGroup
+                select new
+                {
+                    RestaurantName = RestaurantGroup.Key,
+                    AveragePrice = RestaurantGroup.Average(x => x.Price),
+                    AverageExperience = RestaurantGroup.Average(x => x.Experience),
+                    AverageMoodRating = RestaurantGroup.Average(x => x.MoodRating)
+
+                };
+                      foreach (var x in result)
+            {
+                restaurantsAverageEvaluation.Add(new MergedObject(Math.Round(x.AverageMoodRating,2), Math.Round(x.AveragePrice,2), Math.Round(x.AverageExperience,2),x.RestaurantName));
+            }
+
+
+        return restaurantsAverageEvaluation;
+    }
     }
 }
+
