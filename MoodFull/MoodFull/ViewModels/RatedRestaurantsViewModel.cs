@@ -21,7 +21,9 @@ namespace MoodFull.ViewModels
 
         public RatedRestaurantsViewModel()
         {
-            SetMergedList();
+            var listServices = new ListService();
+            listServices.SetMergedList(MergedList);
+            
         }
         
         public List<User> UsersList
@@ -62,25 +64,5 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged();
             }
         }
-        private void SetMergedList()
-        {
-            var usersServices = new UserService();
-            var restaurantServices = new RestaurantService();
-            var evaluationServices = new EvaluationService();
-            UsersList = Task.Run(async () => await usersServices.GetUsersAsync()).Result;
-            RestaurantList = Task.Run(async () => await restaurantServices.GetRestaurantsAsync()).Result;
-            EvaluationList = Task.Run(async () => await evaluationServices.GetEvaluationsAsync()).Result;
-            var list = (from m1 in UsersList
-                              join m2 in EvaluationList on m1.UserId equals m2.UserId
-                              select new { m1.Username, m2.MoodRating, m2.Price, m2.Experience, m2.RestaurantId } into temp
-                              join m3 in RestaurantList on temp.RestaurantId equals m3.RestaurantId
-                              select new { temp.Username, temp.MoodRating, temp.Price, temp.Experience, m3.Name }).ToList();
-            foreach (var x in list)
-            {
-                MergedList.Add(new MergedObject(x.Username, x.MoodRating, x.Price, x.Experience, x.Name));
-            }
-            
-        }
-
     }
 }

@@ -11,14 +11,25 @@ namespace MoodFull.Models
         public decimal Experience { get; set; }
         public string RestaurantName { get; set; }
         public string Username { get; set; }
+        public long UserId { get; set; }
 
-        public MergedObject(string username, decimal rating, decimal price, decimal experience, string restaurantName)
+        public MergedObject(string username, decimal rating, decimal price, decimal experience, string restaurantName, long userId)
         {
             Username = username;
             MoodRating = rating;
             Price = price;
             Experience = experience;
             RestaurantName = restaurantName;
+            UserId = userId;
+        }
+        public MergedObject(decimal rating, decimal price, decimal experience, string restaurantName)
+        {
+            
+            MoodRating = rating;
+            Price = price;
+            Experience = experience;
+            RestaurantName = restaurantName;
+            
         }
     }
 }
