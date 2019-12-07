@@ -15,8 +15,22 @@ namespace CoreWebApi.Models
         public long RestaurantId { get; set; }
 
         [Required(ErrorMessage = "Name is required!")]
-        [StringLength(50, ErrorMessage = "Name cannot be longer than 50 characters")]
+        [StringLength(150, ErrorMessage = "Name cannot be longer than 50 characters")]
         public string Name { get; set; }
+        [StringLength(400)]
+        public string Url { get; set; }
+        [StringLength(100)]
+        public string Type { get; set; }
+        [StringLength(200)]
+        public string Street { get; set; }
+        [StringLength(200)]
+        public string SpecifyStreet { get; set; }
+        [StringLength(50)]
+        public string City { get; set; }
+        [StringLength(50)]
+        public string Country { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public ICollection<Evaluation> Evaluations { get; set; }
     }
