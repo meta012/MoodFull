@@ -85,7 +85,8 @@ namespace CoreWebApi.Models
             foreach (var restaurant in restaurants)
             {
                 var address = restaurant.Street + ", " + restaurant.City;
-                var locationService = new GoogleLocationService(apikey: "AIzaSyBYP4dppO2 - KajLCfjtoTljs4zlPM2VBlg");
+                // Add your google Api key
+                var locationService = new GoogleLocationService(apikey: "API_KEY");
                 var point = locationService.GetLatLongFromAddress(address);
                 this.expectedId = incrementedId;
 
