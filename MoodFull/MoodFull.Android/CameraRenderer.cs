@@ -218,7 +218,7 @@ namespace MoodFull.Droid
             }
             catch (Java.Lang.RuntimeException ex)
             {
-                Permission.TryToGetCameraPermissions(activity);
+                Permission.TryToGetPermissions(activity);
             }
             
         }

@@ -1,7 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GoogleMaps.LocationServices;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CoreWebApi.Models
@@ -16,6 +21,8 @@ namespace CoreWebApi.Models
         {
 
         }
+        private static long incrementedId = 100;
+        private long expectedId = 0;
         public DbSet<User> Users { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Evaluation> Evaluations { get; set; }
@@ -48,7 +55,8 @@ namespace CoreWebApi.Models
             {
                 RestaurantId = 2,
                 Name = "Katpedele"
-            });
+            }
+            );
             modelBuilder.Entity<Evaluation>().HasData(new Evaluation
             {
                 EvaluationId = 1,
@@ -66,7 +74,37 @@ namespace CoreWebApi.Models
                 Experience = (decimal)4.23,
                 UserId = 2,
                 RestaurantId = 2
-            }); 
+            });
+            var restaurants = new List<Restaurant>();
+            using (StreamReader r = new StreamReader("D:/Users/meta/Desktop/MoodFull/objProject/CoreWebApi/Vilnius_restaurants.json"))
+            {
+                string json = r.ReadToEnd();
+                restaurants = JsonConvert.DeserializeObject<List<Restaurant>>(json);
+            }
+
+            foreach (var restaurant in restaurants)
+            {
+                var address = restaurant.Street + ", " + restaurant.City;
+                // Add your google Api key
+                var locationService = new GoogleLocationService(apikey: "API_KEY");
+                var point = locationService.GetLatLongFromAddress(address);
+                this.expectedId = incrementedId;
+
+                modelBuilder.Entity<Restaurant>().HasData(new Restaurant
+                {
+                    RestaurantId = this.expectedId,
+                    Name = restaurant.Name,
+                    Url = restaurant.Url,
+                    Type = restaurant.Type,
+                    Street = restaurant.Street,
+                    SpecifyStreet = restaurant.SpecifyStreet,
+                    City = restaurant.City,
+                    Country = restaurant.Country,
+                    Latitude = point.Latitude,
+                    Longitude = point.Longitude,
+                });
+                incrementedId++;
+            }
         }
     }
 }

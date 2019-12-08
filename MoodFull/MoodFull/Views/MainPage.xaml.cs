@@ -26,12 +26,14 @@ namespace MoodFull
             var page3 = new MasterPageItem() { Title = "Top User", TargetType = typeof(Views.TopUserPage) };
             var page4 = new MasterPageItem() { Title = "User's Evaluations", TargetType = typeof(Views.UsersRatedRestaurants) };
             var page5 = new MasterPageItem() { Title = "Restaurants average evaluations", TargetType = typeof(Views.RestaurantsAverageEvaluations) };
+            var page6 = new MasterPageItem() { Title = "Mapped restaurants", TargetType = typeof(Views.MapPage) };
 
             menuList.Add(page1);
             menuList.Add(page2);
             menuList.Add(page3);
             menuList.Add(page4);
             menuList.Add(page5);
+            menuList.Add(page6);
 
             NavigationList.ItemsSource = menuList;
 

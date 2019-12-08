@@ -21,11 +21,12 @@ namespace MoodFull.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
-            //Asks for camera permission
-            Permission.TryToGetCameraPermissions(this as AppCompatActivity);
+            //Asks for camera and gps permission
+            Permission.TryToGetPermissions(this as AppCompatActivity);
         }
 
     }
