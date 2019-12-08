@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms.Maps;
 
 namespace MoodFull.Models
 {
@@ -16,5 +17,12 @@ namespace MoodFull.Models
         public string Country { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        
+    }
+    public class Place
+    {
+        public string Label { get; set; }
+        public string Address { get; set; }
+        public Position Position { get; set; }
     }
 }

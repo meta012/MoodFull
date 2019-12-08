@@ -17,7 +17,7 @@ namespace MoodFull.Droid
     {
         const int RequestLocationId = 0;
 
-        public static void TryToGetCameraPermissions(AppCompatActivity activity)
+        public static void TryToGetPermissions(AppCompatActivity activity)
         {   
             //Checks the build version
             if ((int)Build.VERSION.SdkInt >= 23)
@@ -25,10 +25,12 @@ namespace MoodFull.Droid
                 //All permissions that we want to request
                 string[] permissionsGroupLocation =
                 {
-                    Android.Manifest.Permission.Camera
+                    Android.Manifest.Permission.Camera,
+                    Android.Manifest.Permission.AccessFineLocation
                 };
 
                 GetPermissions(Android.Manifest.Permission.Camera, activity, permissionsGroupLocation);
+                GetPermissions(Android.Manifest.Permission.AccessFineLocation, activity, permissionsGroupLocation);
                 return;
             }
         }
