@@ -1,12 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              x:Class="MoodFull.Views.RateRestaurantResult">
+ 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    Padding="30">
             <Label Text="Select a restaurant" FontSize="Medium"/>
+            
+            <autocomplete:SfAutoComplete x:Name="autoComplete"
+                                         MaximumDropDownHeight ="180"
+                                         HeightRequest="40"
+                                         SuggestionMode="Contains"
+                                         DisplayMemberPath="NameStreet"
+                                         DataSource="{Binding RestaurantsList}"
+                                         SelectedItem="{Binding SelectedRestaurant}"/>
 
-            <Picker Title="--Select--" ItemsSource="{Binding RestaurantsList, Mode=TwoWay}" ItemDisplayBinding="{Binding NameStreet}" SelectedItem="{Binding SelectedRestaurant}"/>
+                <!--
+            <Picker Title="Select" ItemsSource="{Binding RestaurantsList, Mode=TwoWay}" ItemDisplayBinding="{Binding NameStreet}" SelectedItem="{Binding SelectedRestaurant}"/>
+            -->
             
             <!--
             <StackLayout Padding="0,30,0,0" Orientation="Vertical">
