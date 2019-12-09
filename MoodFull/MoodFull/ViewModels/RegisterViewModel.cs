@@ -5,6 +5,7 @@ using MoodFull.Views;
 using MoodFull.Models;
 using Xamarin.Forms;
 using MoodFull.Services;
+using MoodFull.Interfaces;
 using System.Threading.Tasks;
 
 namespace MoodFull.ViewModels
@@ -20,7 +21,7 @@ namespace MoodFull.ViewModels
         string lastName;
 
         private List<User> _usersList = new List<User>();
-        UserService USER_SERVICE = new UserService();
+        IUserService USER_SERVICE = new UserService();
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }

@@ -5,19 +5,19 @@ using MoodFull.Models;
 using System.Threading.Tasks;
 using MoodFull.Services;
 using System.Linq;
+using MoodFull.Interfaces;
 
 namespace MoodFull.ViewModels
 {
     class RestaurantAverageEvaluationsViewModel : BaseViewModel
     {
         private List<MergedObject> _restaurantsEvaluations = new List<MergedObject>();
+        private IListService listService = new ListService();
 
         public RestaurantAverageEvaluationsViewModel()
         {
-            var listServices = new ListService();
-            listServices.SetMergedList(RestaurantsEvaluations);
-            RestaurantsEvaluations = listServices.SetRestaurantsAverageEvaluations(RestaurantsEvaluations);
-            
+            listService.SetMergedList(RestaurantsEvaluations);
+            RestaurantsEvaluations = listService.SetRestaurantsAverageEvaluations(RestaurantsEvaluations); 
         }
         public List<MergedObject> RestaurantsEvaluations
         {

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using MoodFull.Views;
-using MoodFull.Models;
 using System.Threading.Tasks;
-using MoodFull.Services;
 using System.Linq;
 using System.Collections;
 using System.IO;
+using MoodFull.Models;
+using MoodFull.Services;
+using MoodFull.Interfaces;
 
 namespace MoodFull.ViewModels
 {
@@ -17,12 +18,11 @@ namespace MoodFull.ViewModels
         private List<Restaurant> _restaurantList = new List<Restaurant>();
         private List<User> _usersList = new List<User>();
         private List<MergedObject> _mergedList = new List<MergedObject>();
-
+        private IListService listService = new ListService();
 
         public RatedRestaurantsViewModel()
-        {
-            var listServices = new ListService();
-            listServices.SetMergedList(MergedList);
+        {;
+            listService.SetMergedList(MergedList);
             
         }
         

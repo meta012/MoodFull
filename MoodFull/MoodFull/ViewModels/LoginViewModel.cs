@@ -8,11 +8,14 @@ using Xamarin.Forms;
 using System.Threading.Tasks;
 using MoodFull.Services;
 using MoodFull.Models;
+using MoodFull.Interfaces;
 
 namespace MoodFull.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private IUserService usersServices = new UserService();
+
         //Saugomi user sarasai
         private List<User> _usersList = new List<User>();
         private User _selectedUser = new User();
@@ -71,7 +74,6 @@ namespace MoodFull.ViewModels
         /// </summary>
         private void Login()
         {
-            var usersServices = new UserService();
             UsersList = Task.Run(async () => await usersServices.GetUsersAsync()).Result;
 
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))

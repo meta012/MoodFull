@@ -5,10 +5,11 @@ using MoodFull.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using MoodFull.Services;
+using MoodFull.Interfaces;
 
 namespace MoodFull.Services
 {
-    class ListService
+    class ListService : IListService
     {
         private List<Evaluation> _evaluationList = new List<Evaluation>();
         private List<Restaurant> _restaurantList = new List<Restaurant>();
@@ -45,10 +46,10 @@ namespace MoodFull.Services
             }
             return usersEvaluationList;
         }
-    
-    public List<MergedObject> SetRestaurantsAverageEvaluations(List<MergedObject> mergedList)
-    {
-        List<MergedObject> restaurantsAverageEvaluation = new List<MergedObject>();
+
+        public List<MergedObject> SetRestaurantsAverageEvaluations(List<MergedObject> mergedList)
+        {
+            List<MergedObject> restaurantsAverageEvaluation = new List<MergedObject>();
 
             var result =
                 from x in mergedList
@@ -61,14 +62,14 @@ namespace MoodFull.Services
                     AverageMoodRating = RestaurantGroup.Average(x => x.MoodRating)
 
                 };
-                      foreach (var x in result)
+            foreach (var x in result)
             {
-                restaurantsAverageEvaluation.Add(new MergedObject(Math.Round(x.AverageMoodRating,2), Math.Round(x.AveragePrice,2), Math.Round(x.AverageExperience,2),x.RestaurantName));
+                restaurantsAverageEvaluation.Add(new MergedObject(Math.Round(x.AverageMoodRating, 2), Math.Round(x.AveragePrice, 2), Math.Round(x.AverageExperience, 2), x.RestaurantName));
             }
 
 
-        return restaurantsAverageEvaluation;
-    }
+            return restaurantsAverageEvaluation;
+        }
     }
 }
 

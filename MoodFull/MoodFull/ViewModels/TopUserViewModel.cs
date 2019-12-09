@@ -1,5 +1,6 @@
 ﻿using MoodFull.Models;
 using MoodFull.Services;
+using MoodFull.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace MoodFull.ViewModels
         private User _selectedUser = new User();
         private long _topUserId;
         private int _topUserIdCount;
+        private IUserService userService = new UserService();
+        private IEvaluationService evaluationService = new EvaluationService();
+
         public List<Evaluation> EvaluationsList
         {
             get { return _evaluationList; }
@@ -41,14 +45,6 @@ namespace MoodFull.ViewModels
                 OnPropertyChanged();
             }
         }
-        public TopUserViewModel ()
-        {
-            var evaluationsServices = new EvaluationService();
-            EvaluationsList = Task.Run(async () => await evaluationsServices.GetEvaluationsAsync()).Result;
-            GetMaxUserIDCount();
-            GetUser();
-
-        }
         private void GetMaxUserIDCount()
         {
             var query = EvaluationsList.GroupBy(x => x.UserId)
@@ -62,8 +58,14 @@ namespace MoodFull.ViewModels
         }
         private async Task GetUser()
         {
-            var userService = new UserService();
             SelectedUser = await userService.GetUserAsync(_topUserId);
+        }
+        public TopUserViewModel ()
+        {
+            EvaluationsList = Task.Run(async () => await evaluationService.GetEvaluationsAsync()).Result;
+            GetMaxUserIDCount();
+            GetUser();
+
         }
     }
 }
