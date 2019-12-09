@@ -1,24 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
-using Android.OS;
-using System;
-using System.Collections.Generic;
-using Android.Content;
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
-using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.Android;
-using static Android.Gms.Maps.GoogleMap;
-using Android.Views;
 using MoodFull.CustomizedMap;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(MoodFull.Droid.CustomMapRenderer))]
