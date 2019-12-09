@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="MoodFull.Views.TopUserPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="LightSkyBlue">
             <Label Text="The most frequently evaluated user" 
                    HorizontalOptions="Center"
                    FontSize="Medium"/>

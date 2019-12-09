@@ -25,7 +25,7 @@ namespace CoreWebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Restaurant> restaurants = _dataRepository.GetAll();
+            IEnumerable<Restaurant> restaurants = _dataRepository.GetAll().OrderBy(c => c.Name);
             return Ok(restaurants);
         }
 

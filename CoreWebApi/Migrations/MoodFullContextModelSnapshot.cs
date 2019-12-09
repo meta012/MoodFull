@@ -119,16 +119,26 @@ namespace CoreWebApi.Migrations
                         new
                         {
                             RestaurantId = 1L,
-                            Latitude = 0.0,
-                            Longitude = 0.0,
-                            Name = "Can can"
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.6724131,
+                            Longitude = 25.272993499999998,
+                            Name = "TESTER Algirdo",
+                            Street = "Algirdo g. 53",
+                            Type = "TESTER",
+                            Url = "TESTER.com"
                         },
                         new
                         {
                             RestaurantId = 2L,
-                            Latitude = 0.0,
-                            Longitude = 0.0,
-                            Name = "Katpedele"
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.729648500000003,
+                            Longitude = 25.264011499999999,
+                            Name = "TESTER Didlaukio",
+                            Street = "Didlaukio g. 47",
+                            Type = "TESTER",
+                            Url = "TESTER.com"
                         },
                         new
                         {
@@ -184,8 +194,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 104L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Jurgis ir Drakonas Ogmios",
                             SpecifyStreet = "Ogmios Miestas, Seimos Aikste 6",
                             Street = "Verkiu g. 29",
@@ -1235,8 +1245,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 191L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Holigans",
                             SpecifyStreet = "Ogmios Miestas",
                             Street = "Verkiu g. 29",
@@ -1272,8 +1282,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 194L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Brooklyn Brothers",
                             SpecifyStreet = "Ogmios Miestas, Šeimos Aikštė 3",
                             Street = "Verkiu g. 29",
@@ -1952,8 +1962,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 250L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Buceris",
                             Street = "Verkiu g. 29",
                             Type = "Steakhouse, Deli",
@@ -2244,8 +2254,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 274L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Meze Restoranas",
                             SpecifyStreet = "Seimos Aikste 2",
                             Street = "Verkiu g. 29",
@@ -3638,13 +3648,12 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 388L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.706927499999999,
-                            Longitude = 25.285181300000001,
-                            Name = "Pizza Verde",
-                            SpecifyStreet = "Suite 101 A",
-                            Street = "Kalvariju g. 101A",
-                            Type = "Pizza, Italian",
-                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10793017-Reviews-Pizza_Verde-Vilnius_Vilnius_County.html"
+                            Latitude = 54.680495100000002,
+                            Longitude = 25.295552900000001,
+                            Name = "Coffee1",
+                            Street = "Uzupio str. 9",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d8735568-Reviews-Coffee1-Vilnius_Vilnius_County.html"
                         },
                         new
                         {
@@ -5037,8 +5046,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 503L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Vafliu namai",
                             SpecifyStreet = "Seimos aikste 3",
                             Street = "Verkiu g. 29",
@@ -5291,8 +5300,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 524L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "SENOJI KIBININE Ogmios miestas",
                             SpecifyStreet = "Šeimos aikštė 5",
                             Street = "Verkiu 29",
@@ -5797,8 +5806,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 566L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "BBQ House",
                             Street = "Verkiu g. 29",
                             Type = "Barbecue",
@@ -6187,8 +6196,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 598L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Sushi Express",
                             Street = "Verkiu g. 29",
                             Type = "Japanese, Fast Food",
@@ -6223,8 +6232,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 601L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "La Pasta Makaronu Namai",
                             SpecifyStreet = "Ogmios Miestas, Seimos Aikste 3",
                             Street = "Verkiu g. 29",
@@ -6888,12 +6897,12 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 656L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.674812199999998,
-                            Longitude = 25.284234900000001,
-                            Name = "MOSS cafe",
-                            Street = "Pylimo g. 47",
-                            Type = "International, European",
-                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d17755163-Reviews-MOSS_cafe-Vilnius_Vilnius_County.html"
+                            Latitude = 54.685272099999999,
+                            Longitude = 25.281969199999999,
+                            Name = "Chaika",
+                            Street = "Totoriu g. 7",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d4737785-Reviews-Chaika-Vilnius_Vilnius_County.html"
                         },
                         new
                         {
@@ -7611,13 +7620,13 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 716L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.687240699999997,
-                            Longitude = 25.2818468,
-                            Name = "The Juice Room",
-                            SpecifyStreet = "PC Ozas, 1 Aukstas",
-                            Street = "Gedimino pr. 9",
-                            Type = "Healthy",
-                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d18995305-Reviews-The_Juice_Room-Vilnius_Vilnius_County.html"
+                            Latitude = 54.686109799999997,
+                            Longitude = 25.285978499999999,
+                            Name = "KFC",
+                            SpecifyStreet = "In front of Cathedral",
+                            Street = "Gedimino pr. 1",
+                            Type = "Quick Bites, Fast Food",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10342313-Reviews-KFC-Vilnius_Vilnius_County.html"
                         },
                         new
                         {
@@ -7696,8 +7705,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 723L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.778562299999997,
-                            Longitude = 25.091982099999999,
+                            Latitude = 54.690502700000003,
+                            Longitude = 25.280230299999999,
                             Name = "Zvejo Sapnas",
                             SpecifyStreet = "Suderves village",
                             Street = "Vilniaus g, 2a Suderve",
@@ -8526,8 +8535,8 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 792L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.713816899999998,
-                            Longitude = 25.2939282,
+                            Latitude = 54.713812500000003,
+                            Longitude = 25.2959304,
                             Name = "Cuba Studija Pub&Club",
                             Street = "Verkiu g. 29",
                             Type = "American, Caribbean",
@@ -9159,12 +9168,12 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 844L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.6819585,
-                            Longitude = 25.279805100000001,
-                            Name = "Room",
-                            Street = "Vilniaus g. 39",
-                            Type = "Caribbean, Bar",
-                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d9593357-Reviews-Rhum_Room-Vilnius_Vilnius_County.html"
+                            Latitude = 54.679189399999998,
+                            Longitude = 25.284500999999999,
+                            Name = "No Forks Mexican Grill",
+                            Street = "Vokieciu g. 9",
+                            Type = "Quick Bites, Mexican",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10459560-Reviews-No_Forks_Mexican_Grill-Vilnius_Vilnius_County.html"
                         },
                         new
                         {
@@ -9219,12 +9228,12 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 849L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.710690499999998,
-                            Longitude = 25.303124199999999,
-                            Name = "Sushi City",
-                            Street = "S. Zukausko g. 49",
-                            Type = "Sushi",
-                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d17756768-Reviews-Sushi_City-Vilnius_Vilnius_County.html"
+                            Latitude = 54.679189399999998,
+                            Longitude = 25.284500999999999,
+                            Name = "Zatar",
+                            Street = "Vokieciu g. 9",
+                            Type = "Quick Bites, Mediterranean",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d8649271-Reviews-Zatar-Vilnius_Vilnius_County.html"
                         },
                         new
                         {
@@ -9793,12 +9802,13 @@ namespace CoreWebApi.Migrations
                             RestaurantId = 897L,
                             City = "Vilnius",
                             Country = "Lithuania",
-                            Latitude = 54.681194699999999,
-                            Longitude = 25.294645599999999,
-                            Name = "Zalia Zasis",
-                            Street = "Malunu g. 3",
-                            Type = "Bar, Pub",
-                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d14106298-Reviews-Zalia_Zasis-Vilnius_Vilnius_County.html"
+                            Latitude = 54.6822272,
+                            Longitude = 25.290280500000001,
+                            Name = "Beigelistai",
+                            SpecifyStreet = "Hale market",
+                            Street = "Literatu g. 7",
+                            Type = "Quick Bites, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10468462-Reviews-Beigelistai-Vilnius_Vilnius_County.html"
                         },
                         new
                         {
@@ -10163,6 +10173,334 @@ namespace CoreWebApi.Migrations
                             Street = "Saltoniskiskiu g. 9",
                             Type = "Pub, Gastropub",
                             Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d17792646-Reviews-Wraperia_Suppa_kebs-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 928L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.679292699999998,
+                            Longitude = 25.283606200000001,
+                            Name = "Crustum",
+                            Street = "Vokieciu g. 18a",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10763509-Reviews-Crustum-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 929L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.684364500000001,
+                            Longitude = 25.289748599999999,
+                            Name = "Crustum Bakery & Cafe Pilies 4",
+                            Street = "Pilies Street 4",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d12169517-Reviews-Crustum_Bakery_Cafe_Pilies_4-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 930L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.682254899999997,
+                            Longitude = 25.2658083,
+                            Name = "Taste Map",
+                            Street = "M. K. Ciurlionio 8",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d7724682-Reviews-Taste_Map-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 931L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.684828500000002,
+                            Longitude = 25.276965499999999,
+                            Name = "Elska Coffee",
+                            SpecifyStreet = "Located at the Pamenkalnis Art Gallery",
+                            Street = "Pamenkalnio str. 1",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d12431477-Reviews-Elska_Coffee-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 932L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.680449299999999,
+                            Longitude = 25.283349900000001,
+                            Name = "Huracan Coffee",
+                            SpecifyStreet = "Vilnius, Lithuania",
+                            Street = "Vokieciu g. 15",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d7225990-Reviews-Huracan_Coffee-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 933L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.683882400000002,
+                            Longitude = 25.2897161,
+                            Name = "Caffeine",
+                            Street = "Pilies g. 10",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d1478355-Reviews-Caffeine-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 934L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.678435299999997,
+                            Longitude = 25.286378299999999,
+                            Name = "Italala Caffe",
+                            Street = "Vokieciu g. 1",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d13373025-Reviews-Italala_Caffe-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 935L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.704600900000003,
+                            Longitude = 25.310794999999999,
+                            Name = "Dodo Pizza Antakalnio",
+                            Street = "Antakalnio g. 41",
+                            Type = "Quick Bites, Pizza",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d17593336-Reviews-Dodo_Pizza_Antakalnio-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 936L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.678890000000003,
+                            Longitude = 25.277615399999998,
+                            Name = "Kavos virejai",
+                            Street = "Pylimo g. 19",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d8778806-Reviews-Kavos_virejai-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 937L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.672105100000003,
+                            Longitude = 25.287405400000001,
+                            Name = "Keule Ruke",
+                            Street = "Pylimo 66",
+                            Type = "Quick Bites, American",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d7596242-Reviews-Keule_Ruke-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 938L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.686032599999997,
+                            Longitude = 25.279165599999999,
+                            Name = "Wok to Walk",
+                            Street = "Vilniaus g. 19",
+                            Type = "Quick Bites, Thai",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d6131633-Reviews-Wok_to_Walk-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 939L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.698905699999997,
+                            Longitude = 25.270710399999999,
+                            Name = "Thierry kepykla",
+                            SpecifyStreet = "Quadrum Business City",
+                            Street = "Konstitucijos 21c",
+                            Type = "Bakeries, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d12205064-Reviews-Thierry_kepykla-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 940L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.675222499999997,
+                            Longitude = 25.284034200000001,
+                            Name = "Caif Cafe",
+                            Street = "50 Pylimo gatve",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d12330794-Reviews-Caif_Cafe-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 941L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.687240699999997,
+                            Longitude = 25.2818468,
+                            Name = "Plus Plus Plus",
+                            Street = "Gedimino pr. 9",
+                            Type = "Quick Bites, Bar",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d13125673-Reviews-Plus_Plus_Plus-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 942L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.680663299999999,
+                            Longitude = 25.285385999999999,
+                            Name = "Bookafe",
+                            Street = "Stikliu g. 16",
+                            Type = "Coffee & Tea, Healthy",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10299412-Reviews-Bookafe-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 943L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.6803217,
+                            Longitude = 25.288816600000001,
+                            Name = "Caffeine",
+                            Street = "Didzioji g. 6",
+                            Type = "Coffee & Tea, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d12830549-Reviews-Caffeine-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 944L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.671515300000003,
+                            Longitude = 25.2665574,
+                            Name = "Meatbusters",
+                            Street = "Kauno gatve 35",
+                            Type = "Quick Bites, American",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d12389273-Reviews-Meatbusters-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 945L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.678504199999999,
+                            Longitude = 25.284778299999999,
+                            Name = "Drama Burger Go",
+                            Street = "Vokieciu g. 8",
+                            Type = "Quick Bites, American",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d16945625-Reviews-Drama_Burger_Go-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 946L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.686378300000001,
+                            Longitude = 25.276071999999999,
+                            Name = "Downtown Food Hall & Lounge",
+                            Street = "A. Smetonos g 5",
+                            Type = "Quick Bites, Italian",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d15676239-Reviews-Downtown_Food_Hall_Lounge-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 947L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.687002999999997,
+                            Longitude = 25.284551,
+                            Name = "Tie kepejai",
+                            Street = "Tilto g. 6",
+                            Type = "Quick Bites",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d3953023-Reviews-Tie_kepejai-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 948L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.681660000000001,
+                            Longitude = 25.2657989,
+                            Name = "Feju Kepyklele",
+                            Street = "J. Basanaviciaus g. 37",
+                            Type = "Dessert, Cafe",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d6495877-Reviews-Feju_Kepyklele-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 949L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.687499899999999,
+                            Longitude = 25.2785689,
+                            Name = "McDonald's",
+                            Street = "Gedimino pr. 15",
+                            Type = "Quick Bites, American",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10543393-Reviews-McDonald_s-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 950L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.672056499999997,
+                            Longitude = 25.274210499999999,
+                            Name = "Burger Kiosk",
+                            Street = "Kauno Gatve 16",
+                            Type = "Quick Bites, Fast Food",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d13124197-Reviews-Burger_Kiosk-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 951L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.688125999999997,
+                            Longitude = 25.279601400000001,
+                            Name = "Sushi Express",
+                            Street = "Vilniaus g. 9",
+                            Type = "Quick Bites, Japanese",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d10608119-Reviews-Sushi_Express-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 952L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.713966900000003,
+                            Longitude = 25.272621399999998,
+                            Name = "KFC Ozas",
+                            SpecifyStreet = "PPC Ozas",
+                            Street = "Ozo g. 18",
+                            Type = "Quick Bites, Fast Food",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d3445962-Reviews-KFC_Ozas-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 953L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.672056499999997,
+                            Longitude = 25.274210499999999,
+                            Name = "Time4Pizza",
+                            Street = "Kauno g. 16",
+                            Type = "Quick Bites, Pizza",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d13414179-Reviews-Time4Pizza-Vilnius_Vilnius_County.html"
+                        },
+                        new
+                        {
+                            RestaurantId = 954L,
+                            City = "Vilnius",
+                            Country = "Lithuania",
+                            Latitude = 54.687374900000002,
+                            Longitude = 25.276888899999999,
+                            Name = "Hesburger",
+                            Street = "Gedimino pr. 24",
+                            Type = "Quick Bites, Fast Food",
+                            Url = "https://www.tripadvisor.com/Restaurant_Review-g274951-d4728737-Reviews-Hesburger-Vilnius_Vilnius_County.html"
                         });
                 });
 

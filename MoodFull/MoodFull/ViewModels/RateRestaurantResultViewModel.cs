@@ -2,6 +2,7 @@
 using MoodFull.Models;
 using MoodFull.MoodDetectors;
 using MoodFull.Services;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace MoodFull.ViewModels
 {
@@ -69,7 +71,7 @@ namespace MoodFull.ViewModels
             this._moodDetector = moodDetector;
             this._calculateMood = calculateMood;
 
-            AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
+            //AddRestaurantCommand = new Command(async ()=> await AddRestaurant(), () => !IsWaiting);
 
             GetMood();
             SetRestaurants();
@@ -106,7 +108,6 @@ namespace MoodFull.ViewModels
             {
                 RestaurantsList.Add(rest);
             }
-            RestaurantsList.OrderByDescending(c => c.Name);
         }
 
         // set/get, variables for the mood, exp and price
@@ -153,21 +154,38 @@ namespace MoodFull.ViewModels
         }
 
         // evaluates restaurant
-        public Command EvaluateRestaurant
+        public Command EvaluateCommand
         {
             get
             {
                 return new Command(Evaluate);
             }
         }
-        private void Evaluate()
+        // evaluates restaurant only when current GPS is 100 meters apars
+        private async void Evaluate()
         {
-            var evaluationServices = new EvaluationService();
-            Evaluation newEvaluation = new Evaluation((decimal)_calculatedMood, (decimal)_price, (decimal)_experience, CurrentUser.UserID, _selectedRestaurant.RestaurantId);
-            Task.Run(async () => await evaluationServices.PostEvaluationAsync(newEvaluation));
-            Application.Current.MainPage.DisplayAlert("Success", "", "OK");
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 10;
+            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
+            
+            Location startLocation = new Location(position.Latitude, position.Longitude);
+            Location endLocation = new Location(_selectedRestaurant.Latitude, _selectedRestaurant.Longitude);
+            double distance = Location.CalculateDistance(startLocation, endLocation, DistanceUnits.Kilometers);
+            if (distance > 0.1)
+            {
+                await Application.Current.MainPage.DisplayAlert("Restaurant is too far away", "Please change selected restaurant", "OK");
+                return;
+            }
+            else
+            {
+                var evaluationServices = new EvaluationService();
+                Evaluation newEvaluation = new Evaluation((decimal)_calculatedMood, (decimal)_price, (decimal)_experience, CurrentUser.UserID, _selectedRestaurant.RestaurantId);
+                await evaluationServices.PostEvaluationAsync(newEvaluation);
+                await Application.Current.MainPage.DisplayAlert("Success", "", "OK");
+            }
         }
 
+        /*
         // set/get, variables and Task to add restaurant to the DB
         private string _addRestaurantEntry;
         public string AddRestaurantEntry 
@@ -212,5 +230,6 @@ namespace MoodFull.ViewModels
             // sets new restaurant to the picker
             SetRestaurants();
         }
+        */
     }
 }
