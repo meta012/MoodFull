@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodFull.Views.RatedRestaurants">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="LightSkyBlue">
             <Label Text="The list of rated restaurants"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />

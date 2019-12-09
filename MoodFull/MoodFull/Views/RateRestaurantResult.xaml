@@ -6,9 +6,9 @@
         <StackLayout>
             <Label Text="Select a restaurant" FontSize="Medium"/>
 
-            <Picker Title="--Select--" ItemsSource="{Binding RestaurantsList, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRestaurant}"/>
+            <Picker Title="--Select--" ItemsSource="{Binding RestaurantsList, Mode=TwoWay}" ItemDisplayBinding="{Binding NameStreet}" SelectedItem="{Binding SelectedRestaurant}"/>
             
-
+            <!--
             <StackLayout Padding="0,30,0,0" Orientation="Vertical">
                 <Label Text="Add restaurant:" FontSize="Medium"/>
                 <StackLayout Orientation="Horizontal">
@@ -16,6 +16,7 @@
                     <Button Text="Add" Command="{Binding AddRestaurantCommand}"/>
                 </StackLayout>
             </StackLayout>
+            -->
             
             <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
                 <Label Text="Price range:" FontSize="Medium"/>
@@ -36,7 +37,7 @@
                 <Label Text="{Binding CalculatedMood}" FontSize="Medium"/>
             </StackLayout>
 
-            <Button Text="Evaluate" Command="{Binding EvaluateRestaurant}"/>
+            <Button Text="Evaluate" Command="{Binding EvaluateCommand}"/>
 
             <ActivityIndicator IsRunning="{Binding IsWaiting}"/>
         </StackLayout>

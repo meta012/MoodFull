@@ -17,12 +17,10 @@ namespace MoodFull.Models
         public string Country { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        
-    }
-    public class Place
-    {
-        public string Label { get; set; }
-        public string Address { get; set; }
-        public Position Position { get; set; }
+        public string NameStreet
+        {
+            get { return Name + ", "+ Street; }
+            set { }
+        }
     }
 }

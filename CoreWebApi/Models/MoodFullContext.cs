@@ -49,12 +49,28 @@ namespace CoreWebApi.Models
             modelBuilder.Entity<Restaurant>().HasData(new Restaurant
             {
                 RestaurantId = 1,
-                Name = "Can can"
+                Name = "TESTER Algirdo",
+                Url = "TESTER.com",
+                Type = "TESTER",
+                Street = "Algirdo g. 53",
+                SpecifyStreet = null,
+                City = "Vilnius",
+                Country = "Lithuania",
+                Latitude = 54.6724131,
+                Longitude = 25.2729935,
 
             }, new Restaurant
             {
                 RestaurantId = 2,
-                Name = "Katpedele"
+                Name = "TESTER Didlaukio",
+                Url = "TESTER.com",
+                Type = "TESTER",
+                Street = "Didlaukio g. 47",
+                SpecifyStreet = null,
+                City = "Vilnius",
+                Country = "Lithuania",
+                Latitude = 54.7296485,
+                Longitude = 25.2640115,
             }
             );
             modelBuilder.Entity<Evaluation>().HasData(new Evaluation
@@ -75,18 +91,19 @@ namespace CoreWebApi.Models
                 UserId = 2,
                 RestaurantId = 2
             });
+            /*
+            // functions to add json file to the database and convert addresses to latitude+longitude
             var restaurants = new List<Restaurant>();
-            using (StreamReader r = new StreamReader("D:/Users/meta/Desktop/MoodFull/objProject/CoreWebApi/Vilnius_restaurants.json"))
+            using (StreamReader r = new StreamReader("D:/Users/meta/Desktop/Mood/objProject/CoreWebApi/Vilnius_restaurants.json"))
             {
                 string json = r.ReadToEnd();
                 restaurants = JsonConvert.DeserializeObject<List<Restaurant>>(json);
             }
-
             foreach (var restaurant in restaurants)
             {
                 var address = restaurant.Street + ", " + restaurant.City;
                 // Add your google Api key
-                var locationService = new GoogleLocationService(apikey: "API_KEY");
+                var locationService = new GoogleLocationService(apikey: "Api_Key");
                 var point = locationService.GetLatLongFromAddress(address);
                 this.expectedId = incrementedId;
 
@@ -105,6 +122,7 @@ namespace CoreWebApi.Models
                 });
                 incrementedId++;
             }
+            */
         }
     }
 }
