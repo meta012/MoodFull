@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MoodFull.Models;
+using MoodFull.Interfaces;
 
 namespace MoodFull.Services
 {
-    public class EvaluationService
+    public class EvaluationService: IEvaluationService
     {
         private const string evaluationUrl = "Evaluations";
         //Gauna evaluationus

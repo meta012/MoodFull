@@ -22,6 +22,7 @@ namespace MoodFull.ViewModels
         private byte[] _faceImage;
         private IMoodDetector _moodDetector;
         private ICalculateMood _calculateMood;
+        private IEvaluationService evaluationServices;
 
         private MoodModel _moodModel;
 
@@ -178,7 +179,7 @@ namespace MoodFull.ViewModels
             }
             else
             {
-                var evaluationServices = new EvaluationService();
+                evaluationServices = new EvaluationService();
                 Evaluation newEvaluation = new Evaluation((decimal)_calculatedMood, (decimal)_price, (decimal)_experience, CurrentUser.UserID, _selectedRestaurant.RestaurantId);
                 await evaluationServices.PostEvaluationAsync(newEvaluation);
                 await Application.Current.MainPage.DisplayAlert("Success", "", "OK");

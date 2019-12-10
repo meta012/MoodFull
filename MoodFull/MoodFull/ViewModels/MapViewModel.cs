@@ -11,6 +11,7 @@ using Xamarin.Forms.Maps;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using MoodFull.CustomizedMap;
+using MoodFull.Interfaces;
 
 namespace MoodFull.ViewModels
 {
@@ -18,6 +19,8 @@ namespace MoodFull.ViewModels
     {
 
         List<Restaurant> _restaurantsList = new List<Restaurant>();
+        IRestaurantService restaurantsServices = new RestaurantService();
+
         public List<Restaurant> RestaurantsList
         {
             get { return _restaurantsList; }
@@ -32,7 +35,6 @@ namespace MoodFull.ViewModels
         {
             RestMap = new CustomMap();
 
-            var restaurantsServices = new RestaurantService();
             RestaurantsList = Task.Run(async () => await restaurantsServices.GetRestaurantsAsync()).Result;
 
             try
