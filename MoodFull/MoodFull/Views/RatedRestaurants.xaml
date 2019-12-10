@@ -3,29 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoodFull.Views.RatedRestaurants">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="LightSkyBlue">
-            <Label Text="The list of rated restaurants"
+        <StackLayout
+            BackgroundColor="LightSkyBlue">
+            <Label Text="The list of every user's evaluations"
+                   FontSize="Large"
+                   TextColor="Black"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <SearchBar Placeholder="Search for a restaurant" TextChanged="SearchBar_OnTextChanged"></SearchBar>
+            <SearchBar Placeholder="Search for a user" TextChanged="SearchBar_OnTextChanged1"></SearchBar>
             <ListView ItemsSource="{Binding MergedList}"
                       HorizontalOptions="Center"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      x:Name="MergedListListsView">
+                <ListView.Header>
+
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Text="Username" BackgroundColor="Green" Grid.Column="0" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Restaurant Name" BackgroundColor="Green" Grid.Column="1" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Experience" BackgroundColor="Green" Grid.Column="2" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Price" BackgroundColor="Green" Grid.Column="3" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="Mood Rating" BackgroundColor="Green" Grid.Column="4" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                    </Grid>
+                </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal"
-                                         Padding="12,6">
-                                <Label Text="{Binding Username}"
-                                       FontSize="Medium"/>
-                                <Label Text="{Binding RestaurantName}"
-                                       FontSize="Medium"/>
-                                <Label Text="{Binding Experience}"
-                                       FontSize="Medium"/>
-                                <Label Text="{Binding Price}"
-                                       FontSize="Medium"/>
-                                <Label Text="{Binding MoodRating}"
-                                       FontSize="Medium"/>
-                            </StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Username}" BackgroundColor="#008998" Grid.Column="0" Grid.Row="0" FontSize="Large" TextColor="Black"/>
+                                <Label Text="{Binding RestaurantName}" BackgroundColor="#008998" Grid.Column="1" Grid.Row="0" FontSize="Medium" TextColor="Black"/>
+                                <Label Text="{Binding Experience}" BackgroundColor="#008998" Grid.Column="2" Grid.Row="0" FontSize="Large" TextColor="Black"/>
+                                <Label Text="{Binding Price}" BackgroundColor="#008998" Grid.Column="3" Grid.Row="0" FontSize="Large" TextColor="Black"/>
+                                <Label Text="{Binding MoodRating}" BackgroundColor="#008998" Grid.Column="4" Grid.Row="0" FontSize="Large" TextColor="Black"/>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
