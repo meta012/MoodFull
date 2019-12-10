@@ -8,7 +8,6 @@ namespace MoodFull.CustomizedMap
 {
     public class CustomPin : Pin
     {
-        public decimal MoodRating { get; set; }
         public string Url { get; set; }
     }
 }

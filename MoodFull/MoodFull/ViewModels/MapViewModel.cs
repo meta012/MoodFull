@@ -11,6 +11,7 @@ using Xamarin.Forms.Maps;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using MoodFull.CustomizedMap;
+using System.Linq;
 
 namespace MoodFull.ViewModels
 {
@@ -69,7 +70,6 @@ namespace MoodFull.ViewModels
                 Label = "Your current possition",
                 Address = null,
                 Position = new Position(position.Latitude, position.Longitude),
-                Url = "xamUrl"
             });;        
         }
     }

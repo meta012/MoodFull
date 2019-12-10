@@ -6,6 +6,7 @@ namespace MoodFull.Models
 {
     public class MergedObject
     {
+        public long RestaurantId { get; set; }
         public decimal MoodRating { get; set; }
         public decimal Price { get; set; }
         public decimal Experience { get; set; }
@@ -13,8 +14,9 @@ namespace MoodFull.Models
         public string Username { get; set; }
         public long UserId { get; set; }
 
-        public MergedObject(string username, decimal rating, decimal price, decimal experience, string restaurantName, long userId)
+        public MergedObject(long restId, string username, decimal rating, decimal price, decimal experience, string restaurantName, long userId)
         {
+            RestaurantId = restId;
             Username = username;
             MoodRating = rating;
             Price = price;
