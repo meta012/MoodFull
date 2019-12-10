@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MoodFull.Models;
 using System.Threading.Tasks;
-using MoodFull.Services;
 using System.Linq;
+using MoodFull.Services;
+using MoodFull.Models;
+using MoodFull.Interfaces;
 
 namespace MoodFull.ViewModels
 {
     class UsersRatedRestaurantsViewModel : BaseViewModel
     {
-        
         private List<MergedObject> _usersEvaluations = new List<MergedObject>();
+        IListService listService = new ListService();
 
         public UsersRatedRestaurantsViewModel()
         {
-            var listServices = new ListService();
-            listServices.SetMergedList(UsersEvaluations);
-            UsersEvaluations=listServices.SetUsersEvaluations(UsersEvaluations);
+            listService.SetMergedList(UsersEvaluations);
+            UsersEvaluations= listService.SetUsersEvaluations(UsersEvaluations);
         }
         public List<MergedObject> UsersEvaluations
         {

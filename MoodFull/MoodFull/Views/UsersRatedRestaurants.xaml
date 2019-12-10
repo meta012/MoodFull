@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <StackLayout
             BackgroundColor="LightSkyBlue">
-            <Label Text="The list of every restaurant average evaluation"
+            <Label Text="The list of your evaluations"
                    FontSize="Large"
                    TextColor="Black"
                 VerticalOptions="CenterAndExpand" 

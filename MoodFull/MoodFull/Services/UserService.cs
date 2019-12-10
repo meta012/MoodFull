@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MoodFull.Models;
+using MoodFull.Interfaces;
 
 namespace MoodFull.Services
 {
-    public class UserService
+    public class UserService: IUserService
     {
         private const string userUrl = "Users";
         //Gauna userius

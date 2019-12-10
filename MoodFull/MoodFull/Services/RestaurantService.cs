@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MoodFull.Models;
+using MoodFull.Interfaces;
 
 namespace MoodFull.Services
 {
-    public class RestaurantService
+    public class RestaurantService: IRestaurantService
     {
         private const string restaurantUrl = "Restaurants";
         //Gauna restoranus
