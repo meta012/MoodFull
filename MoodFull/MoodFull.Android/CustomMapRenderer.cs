@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Content;
+using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using Android.Views;
+using Android.Widget;
+using MoodFull.CustomizedMap;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.Android;
-using MoodFull.CustomizedMap;
+using static Android.Gms.Maps.GoogleMap;
+using View = Xamarin.Forms.View;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(MoodFull.Droid.CustomMapRenderer))]
 namespace MoodFull.Droid
@@ -12,21 +18,10 @@ namespace MoodFull.Droid
     [Obsolete]
     public class CustomMapRenderer : MapRenderer
     {
+        List<CustomPin> customPins;
         public CustomMapRenderer(Context context) : base(context)
         {
         }
-        protected override MarkerOptions CreateMarker(Pin pin)
-        {
-            MarkerOptions marker = base.CreateMarker(pin);
-
-            if (pin is CustomPin customPin && customPin.Label == "Your current possition")
-            {
-                var color = BitmapDescriptorFactory.HueBlue;
-                marker.SetIcon(BitmapDescriptorFactory.DefaultMarker(color));
-            }
-            return marker;
-        }
-        /*
         protected override void OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs<Map> e)
         {
             base.OnElementChanged(e);
@@ -43,14 +38,30 @@ namespace MoodFull.Droid
             }
         }
 
+        protected override void OnMapReady(GoogleMap map)
+        {
+            base.OnMapReady(map);
+
+            NativeMap.InfoWindowClick += OnInfoWindowClick;
+
+        }
         protected override MarkerOptions CreateMarker(Pin pin)
         {
             var marker = new MarkerOptions();
             marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
             marker.SetTitle(pin.Label);
-            marker.SetSnippet(pin.Address);
-            var color = BitmapDescriptorFactory.HueGreen;
+            marker.SetSnippet(pin.Address + "\n" + "Vienas");
+            float color;
+            if (pin is CustomPin customPin && customPin.Label == "Your current possition")
+            {
+                color = BitmapDescriptorFactory.HueBlue;
+            }
+            else
+            {
+                color = BitmapDescriptorFactory.HueRed;
+            }
             marker.SetIcon(BitmapDescriptorFactory.DefaultMarker(color));
+            customPins.Add(pin as CustomPin);
             return marker;
         }
 
@@ -71,11 +82,6 @@ namespace MoodFull.Droid
             }
         }
 
-        public Android.Views.View GetInfoWindow(Marker marker)
-        {
-            return null;
-        }
-
         CustomPin GetCustomPin(Marker annotation)
         {
             var position = new Position(annotation.Position.Latitude, annotation.Position.Longitude);
@@ -86,6 +92,36 @@ namespace MoodFull.Droid
                     return pin;
                 }
             }
+            return null;
+        }
+        /*
+        public Android.Views.View GetInfoContents(Marker marker)
+        {
+            Android.Views.View view;
+            var inflater = Android.App.Application.Context.GetSystemService(Context.LayoutInflaterService) as Android.Views.LayoutInflater;
+            if (inflater != null)
+            {
+                Android.Views.View view;
+
+                var customPin = GetCustomPin(marker);
+                view.
+                if (customPin == null)
+                {
+                    throw new Exception("Custom pin not found");
+                }
+
+                if (customPin.Id == "Xamarin")
+                {
+                    view = inflater.Inflate(Resource.Layout.XamarinMapInfoWindow, null);
+                }
+
+                return view;
+            }
+            return null;
+        }
+
+        public Android.Views.View GetInfoWindow(Marker marker)
+        {
             return null;
         }
         */

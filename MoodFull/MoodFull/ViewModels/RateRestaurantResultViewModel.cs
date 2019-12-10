@@ -164,6 +164,11 @@ namespace MoodFull.ViewModels
         // evaluates restaurant only when current GPS is 100 meters apars
         private async void Evaluate()
         {
+            if (_selectedRestaurant == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("No restaurant is selected", "Please select a restaurant", "OK");
+                return;
+            }
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 10;
             var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));

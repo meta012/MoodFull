@@ -44,8 +44,7 @@ namespace MoodFull.ViewModels
                         Label = restaurant.Name,
                         Address = restaurant.Street + ", " + restaurant.City,
                         Position = new Position(restaurant.Latitude, restaurant.Longitude),
-                        Name = "Xamarin",
-                        Url = "XamarinUrl"
+                        Url = restaurant.Url,
                     };
                     RestMap.CustomPins = new List<CustomPin> { pin };
                     RestMap.Pins.Add(pin);
@@ -70,7 +69,6 @@ namespace MoodFull.ViewModels
                 Label = "Your current possition",
                 Address = null,
                 Position = new Position(position.Latitude, position.Longitude),
-                Name = "xamarin",
                 Url = "xamUrl"
             });;        
         }
