@@ -27,6 +27,7 @@ namespace MoodFull
             var page4 = new MasterPageItem() { Title = "User's Evaluations", TargetType = typeof(Views.UsersRatedRestaurants) };
             var page5 = new MasterPageItem() { Title = "Restaurants average evaluations", TargetType = typeof(Views.RestaurantsAverageEvaluations) };
             var page6 = new MasterPageItem() { Title = "Mapped restaurants", TargetType = typeof(Views.MapPage) };
+            var page7 = new MasterPageItem() { Title = "Restaurant List", TargetType = typeof(Views.RestaurantList) };
 
             menuList.Add(page1);
             menuList.Add(page2);
@@ -34,6 +35,7 @@ namespace MoodFull
             menuList.Add(page4);
             menuList.Add(page5);
             menuList.Add(page6);
+            menuList.Add(page7);
 
             NavigationList.ItemsSource = menuList;
 
