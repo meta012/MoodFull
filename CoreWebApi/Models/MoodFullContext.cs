@@ -91,10 +91,11 @@ namespace CoreWebApi.Models
                 UserId = 2,
                 RestaurantId = 2
             });
-            /*
+            
             // functions to add json file to the database and convert addresses to latitude+longitude
+            /*
             var restaurants = new List<Restaurant>();
-            using (StreamReader r = new StreamReader("D:/Users/meta/Desktop/Mood/objProject/CoreWebApi/Vilnius_restaurants.json"))
+            using (StreamReader r = new StreamReader("D:/Users/meta/Desktop/Mood/MoodFull/CoreWebApi/Vilnius_restaurants.json"))
             {
                 string json = r.ReadToEnd();
                 restaurants = JsonConvert.DeserializeObject<List<Restaurant>>(json);

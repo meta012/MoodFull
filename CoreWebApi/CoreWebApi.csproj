@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191207135700_CoreWebApi.Models.RestaurantSeed.cs" />
-    <Compile Remove="Migrations\20191207135700_CoreWebApi.Models.RestaurantSeed.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Vilnius_restaurants.json" />
   </ItemGroup>
 
