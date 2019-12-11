@@ -1,32 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Content;
+using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using Android.Graphics;
+using Android.Views;
+using Android.Widget;
+using MoodFull.CustomizedMap;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.Android;
-using MoodFull.CustomizedMap;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(MoodFull.Droid.CustomMapRenderer))]
 namespace MoodFull.Droid
 {
     [Obsolete]
-    public class CustomMapRenderer : MapRenderer
+    public class CustomMapRenderer : MapRenderer, GoogleMap.IInfoWindowAdapter
     {
+        List<CustomPin> customPins;
         public CustomMapRenderer(Context context) : base(context)
         {
         }
-        protected override MarkerOptions CreateMarker(Pin pin)
-        {
-            MarkerOptions marker = base.CreateMarker(pin);
-
-            if (pin is CustomPin customPin && customPin.Label == "Your current possition")
-            {
-                var color = BitmapDescriptorFactory.HueBlue;
-                marker.SetIcon(BitmapDescriptorFactory.DefaultMarker(color));
-            }
-            return marker;
-        }
-        /*
         protected override void OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs<Map> e)
         {
             base.OnElementChanged(e);
@@ -43,14 +37,35 @@ namespace MoodFull.Droid
             }
         }
 
+        protected override void OnMapReady(GoogleMap map)
+        {
+            base.OnMapReady(map);
+
+            NativeMap.InfoWindowClick += OnInfoWindowClick;
+            NativeMap.SetInfoWindowAdapter(this);
+
+        }
         protected override MarkerOptions CreateMarker(Pin pin)
         {
             var marker = new MarkerOptions();
             marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
             marker.SetTitle(pin.Label);
-            marker.SetSnippet(pin.Address);
-            var color = BitmapDescriptorFactory.HueGreen;
-            marker.SetIcon(BitmapDescriptorFactory.DefaultMarker(color));
+            
+            float color;
+            if (pin is CustomPin customPin)
+            {
+                if (customPin.Label == "Your current possition")
+                {
+                    color = BitmapDescriptorFactory.HueBlue;
+                }
+                else
+                {
+                    color = BitmapDescriptorFactory.HueRed;
+                    marker.SetSnippet(customPin.Address);
+                }
+                marker.SetIcon(BitmapDescriptorFactory.DefaultMarker(color));
+            }
+            customPins.Add(pin as CustomPin);
             return marker;
         }
 
@@ -71,11 +86,6 @@ namespace MoodFull.Droid
             }
         }
 
-        public Android.Views.View GetInfoWindow(Marker marker)
-        {
-            return null;
-        }
-
         CustomPin GetCustomPin(Marker annotation)
         {
             var position = new Position(annotation.Position.Latitude, annotation.Position.Longitude);
@@ -88,6 +98,33 @@ namespace MoodFull.Droid
             }
             return null;
         }
-        */
+
+        public Android.Views.View GetInfoContents(Marker marker)
+        {
+            var context = Android.App.Application.Context;
+            LinearLayout info = new LinearLayout(context);
+            info.Orientation = Orientation.Vertical;
+
+            TextView title = new TextView(context);
+            title.SetTextColor(Android.Graphics.Color.Black);
+            title.Gravity = GravityFlags.Center;
+            title.SetTypeface(null, TypefaceStyle.Bold);
+            title.Text = marker.Title;
+
+            TextView snippet = new TextView(context);
+            snippet.SetTextColor(Android.Graphics.Color.Gray);
+            snippet.Text = marker.Snippet;
+
+            info.AddView(title);
+            info.AddView(snippet);
+
+            return info;
+        }
+
+        public Android.Views.View GetInfoWindow(Marker marker)
+        {
+            return null;
+        }
+        
     }
 }

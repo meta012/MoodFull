@@ -27,10 +27,10 @@ namespace MoodFull.Services
                         join m2 in _evaluationList on m1.UserId equals m2.UserId
                         select new { m1.Username, m2.MoodRating, m2.Price, m2.Experience, m2.RestaurantId, m1.UserId } into temp
                         join m3 in _restaurantList on temp.RestaurantId equals m3.RestaurantId
-                        select new { temp.Username, temp.MoodRating, temp.Price, temp.Experience, m3.Name, temp.UserId }).ToList();
+                        select new { temp.Username, temp.MoodRating, temp.Price, temp.Experience, temp.RestaurantId, m3.Name, temp.UserId }).ToList();
             foreach (var x in list)
             {
-                mergedList.Add(new MergedObject(x.Username, x.MoodRating, x.Price, x.Experience, x.Name, x.UserId));
+                mergedList.Add(new MergedObject(x.RestaurantId, x.Username, x.MoodRating, x.Price, x.Experience, x.Name, x.UserId));
             }
             return mergedList;
         }
