@@ -57,7 +57,11 @@ namespace MoodFull.Services
                 select new
                 {
                     RestaurantName = RestaurantGroup.Key,
-                    AveragePrice = RestaurantGroup.Average(x => x.Price),
+                    AveragePrice = RestaurantGroup.Aggregate(
+                        seed: 0m,
+                        (res, item) => res + item.Price,
+                        resultSelector: res => res / RestaurantGroup.Count()),
+                    //RestaurantGroup.Average(x => x.Price),
                     AverageExperience = RestaurantGroup.Average(x => x.Experience),
                     AverageMoodRating = RestaurantGroup.Average(x => x.MoodRating)
 
