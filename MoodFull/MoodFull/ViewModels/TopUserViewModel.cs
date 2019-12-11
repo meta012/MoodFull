@@ -15,8 +15,8 @@ namespace MoodFull.ViewModels
         private User _selectedUser = new User();
         private long _topUserId;
         private int _topUserIdCount;
-        private IUserService userService = new UserService();
-        private IEvaluationService evaluationService = new EvaluationService();
+        private IUserService userService = ServiceFactory.GetUserService();
+        private IEvaluationService evaluationService = ServiceFactory.GetEvaluationService();
 
         public List<Evaluation> EvaluationsList
         {

@@ -18,7 +18,7 @@ namespace MoodFull.ViewModels
         private List<Restaurant> _restaurantList = new List<Restaurant>();
         private List<User> _usersList = new List<User>();
         private List<MergedObject> _mergedList = new List<MergedObject>();
-        private IListService listService = new ListService();
+        private IListService listService = ServiceFactory.GetListService();
 
         public RatedRestaurantsViewModel()
         {;

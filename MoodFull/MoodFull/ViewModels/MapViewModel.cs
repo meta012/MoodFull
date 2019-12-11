@@ -20,7 +20,7 @@ namespace MoodFull.ViewModels
     {
 
         List<Restaurant> _restaurantsList = new List<Restaurant>();
-        IRestaurantService restaurantsServices = new RestaurantService();
+        IRestaurantService restaurantsServices = ServiceFactory.GetRestaurantService();
 
         public List<Restaurant> RestaurantsList
         {

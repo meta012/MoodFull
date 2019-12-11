@@ -21,7 +21,7 @@ namespace MoodFull.ViewModels
         string lastName;
 
         private List<User> _usersList = new List<User>();
-        IUserService USER_SERVICE = new UserService();
+        IUserService USER_SERVICE = ServiceFactory.GetUserService();
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
