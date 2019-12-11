@@ -13,3 +13,7 @@ Jei SharpProxy nustatytas External Port 5000 - tai taip ir palikti. Žinoma, pak
 5000/api/user
 8. Paleisti projektą. Man ant emuliatoriaus neveikia, geriausia prijungtus androidinį telefoną.
 9. **ĮSPĖJIMAS** Telefono WIFI turi būti tas pats, kaip ir kompiuteryje, kuriame paleista programa.
+
+
+Norint, kad pasileistu maps'ai, reikia pakeisti Google Api_Key.
+Taip pat, norint, kad veiktu emociju detection, reikia pakeisti Azure Api_key
