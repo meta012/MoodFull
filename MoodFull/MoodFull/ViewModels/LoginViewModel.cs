@@ -14,7 +14,7 @@ namespace MoodFull.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private IUserService usersServices = new UserService();
+        private IUserService usersServices = ServiceFactory.GetUserService();
 
         //Saugomi user sarasai
         private List<User> _usersList = new List<User>();

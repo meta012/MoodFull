@@ -12,7 +12,7 @@ namespace MoodFull.ViewModels
     class RestaurantAverageEvaluationsViewModel : BaseViewModel
     {
         private List<MergedObject> _restaurantsEvaluations = new List<MergedObject>();
-        private IListService listService = new ListService();
+        private IListService listService = ServiceFactory.GetListService();
 
         public RestaurantAverageEvaluationsViewModel()
         {

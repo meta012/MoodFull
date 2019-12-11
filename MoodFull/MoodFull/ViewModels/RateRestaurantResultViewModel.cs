@@ -184,7 +184,7 @@ namespace MoodFull.ViewModels
             }
             else
             {
-                evaluationServices = new EvaluationService();
+                evaluationServices = ServiceFactory.GetEvaluationService();
                 Evaluation newEvaluation = new Evaluation((decimal)_calculatedMood, (decimal)_price, (decimal)_experience, CurrentUser.UserID, _selectedRestaurant.RestaurantId);
                 await evaluationServices.PostEvaluationAsync(newEvaluation);
                 await Application.Current.MainPage.DisplayAlert("Success", "", "OK");
