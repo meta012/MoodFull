@@ -1,4 +1,6 @@
 
+This is an app, that was done in the Vilnius University by a team of 5 students, including me.
+
 MoodWcfService was a primary solution, so it is not functioning properly.
 To run a program:
 - CoreWebApi -> appsettings.json -> change AttachDbFilename to location, that the database (App_Data folder) is in
