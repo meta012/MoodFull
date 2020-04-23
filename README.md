@@ -1,3 +1,15 @@
+
+MoodWcfService was a primary solution, so it is not functioning properly.
+To run a program:
+- CoreWebApi -> appsettings.json -> change AttachDbFilename to location, that the database (App_Data folder) is in
+- Run CoreWebApi through IIS Express, do not close this project
+- SharpProxy -> change InternalPort to 63772 -> run
+- MoodFull -> RestClient -> change url to SharpProxy shown "Your IP Address" -> run
+
+**Caution**: phone WIFI address must be the same, as the computer that the program is running on.
+
+---------------------------------------------
+
 # VEIKIMAS
 
 1. Įsirašyti SharpProxy
